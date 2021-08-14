@@ -1,0 +1,26 @@
+name: Flutter Workflow
+env:
+  FLUTTER_VERSION: "beta"
+on: push
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Installing Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: ${{ env.FLUTTER_VERSION }}
+
+      - name: Installing dependencies
+        run: flutter pub get
+
+      - name: Running tests
+        run: flutter test --no-pub --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
