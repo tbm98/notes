@@ -1,5 +1,7 @@
 # notes
-Not just a note.
+Not just a note. 
+
+[![codecov](https://codecov.io/gh/tbm98/notes/branch/main/graph/badge.svg?token=3EM4sRyDFi)](https://codecov.io/gh/tbm98/notes)
 
 | Platform      | Available |
 | ----------- | ----------- |
