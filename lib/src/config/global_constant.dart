@@ -1,1 +1,2 @@
 
+const fabDimension = 56;
