@@ -13,7 +13,7 @@ class BottomNaviBarWidget extends ConsumerWidget {
     return BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: (index) => ref.read(currentTabProvider).state = index,
-      items: [
+      items: const [
         BottomNavigationBarItem(
             icon: Icon(Icons.check_box_outlined), label: 'Todo list'),
         BottomNavigationBarItem(

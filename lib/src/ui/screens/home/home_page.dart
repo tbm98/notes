@@ -10,9 +10,8 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: const [AvatarWidget()],
-      ),
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(actions: const [AvatarWidget()]),
       body: MyPageView(),
       floatingActionButton: const AddNoteButton(),
       bottomNavigationBar: const BottomNaviBarWidget(),

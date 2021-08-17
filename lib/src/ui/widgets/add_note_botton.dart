@@ -24,9 +24,10 @@ class AddNoteButton extends ConsumerWidget {
       closedBuilder: (BuildContext context, void Function() action) {
         return FloatingActionButton(
           onPressed: action,
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.edit),
         );
       },
+      transitionDuration: const Duration(milliseconds: 500),
     );
   }
 }
