@@ -20,16 +20,9 @@ AddNoteState _$AddNoteStateFromJson(Map<String, dynamic> json) {
 class _$AddNoteStateTearOff {
   const _$AddNoteStateTearOff();
 
-  _AddNoteState call(
-      {required String title,
-      required String note,
-      DateTime? date,
-      DateTime? alarm}) {
+  _AddNoteState call({required NoteModel noteModel}) {
     return _AddNoteState(
-      title: title,
-      note: note,
-      date: date,
-      alarm: alarm,
+      noteModel: noteModel,
     );
   }
 
@@ -43,10 +36,7 @@ const $AddNoteState = _$AddNoteStateTearOff();
 
 /// @nodoc
 mixin _$AddNoteState {
-  String get title => throw _privateConstructorUsedError;
-  String get note => throw _privateConstructorUsedError;
-  DateTime? get date => throw _privateConstructorUsedError;
-  DateTime? get alarm => throw _privateConstructorUsedError;
+  NoteModel get noteModel => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -59,7 +49,9 @@ abstract class $AddNoteStateCopyWith<$Res> {
   factory $AddNoteStateCopyWith(
           AddNoteState value, $Res Function(AddNoteState) then) =
       _$AddNoteStateCopyWithImpl<$Res>;
-  $Res call({String title, String note, DateTime? date, DateTime? alarm});
+  $Res call({NoteModel noteModel});
+
+  $NoteModelCopyWith<$Res> get noteModel;
 }
 
 /// @nodoc
@@ -72,29 +64,21 @@ class _$AddNoteStateCopyWithImpl<$Res> implements $AddNoteStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? title = freezed,
-    Object? note = freezed,
-    Object? date = freezed,
-    Object? alarm = freezed,
+    Object? noteModel = freezed,
   }) {
     return _then(_value.copyWith(
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      note: note == freezed
-          ? _value.note
-          : note // ignore: cast_nullable_to_non_nullable
-              as String,
-      date: date == freezed
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      alarm: alarm == freezed
-          ? _value.alarm
-          : alarm // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+      noteModel: noteModel == freezed
+          ? _value.noteModel
+          : noteModel // ignore: cast_nullable_to_non_nullable
+              as NoteModel,
     ));
+  }
+
+  @override
+  $NoteModelCopyWith<$Res> get noteModel {
+    return $NoteModelCopyWith<$Res>(_value.noteModel, (value) {
+      return _then(_value.copyWith(noteModel: value));
+    });
   }
 }
 
@@ -105,7 +89,10 @@ abstract class _$AddNoteStateCopyWith<$Res>
           _AddNoteState value, $Res Function(_AddNoteState) then) =
       __$AddNoteStateCopyWithImpl<$Res>;
   @override
-  $Res call({String title, String note, DateTime? date, DateTime? alarm});
+  $Res call({NoteModel noteModel});
+
+  @override
+  $NoteModelCopyWith<$Res> get noteModel;
 }
 
 /// @nodoc
@@ -120,28 +107,13 @@ class __$AddNoteStateCopyWithImpl<$Res> extends _$AddNoteStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? title = freezed,
-    Object? note = freezed,
-    Object? date = freezed,
-    Object? alarm = freezed,
+    Object? noteModel = freezed,
   }) {
     return _then(_AddNoteState(
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      note: note == freezed
-          ? _value.note
-          : note // ignore: cast_nullable_to_non_nullable
-              as String,
-      date: date == freezed
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      alarm: alarm == freezed
-          ? _value.alarm
-          : alarm // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+      noteModel: noteModel == freezed
+          ? _value.noteModel
+          : noteModel // ignore: cast_nullable_to_non_nullable
+              as NoteModel,
     ));
   }
 }
@@ -150,24 +122,17 @@ class __$AddNoteStateCopyWithImpl<$Res> extends _$AddNoteStateCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class _$_AddNoteState with DiagnosticableTreeMixin implements _AddNoteState {
-  const _$_AddNoteState(
-      {required this.title, required this.note, this.date, this.alarm});
+  const _$_AddNoteState({required this.noteModel});
 
   factory _$_AddNoteState.fromJson(Map<String, dynamic> json) =>
       _$_$_AddNoteStateFromJson(json);
 
   @override
-  final String title;
-  @override
-  final String note;
-  @override
-  final DateTime? date;
-  @override
-  final DateTime? alarm;
+  final NoteModel noteModel;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AddNoteState(title: $title, note: $note, date: $date, alarm: $alarm)';
+    return 'AddNoteState(noteModel: $noteModel)';
   }
 
   @override
@@ -175,33 +140,21 @@ class _$_AddNoteState with DiagnosticableTreeMixin implements _AddNoteState {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'AddNoteState'))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('note', note))
-      ..add(DiagnosticsProperty('date', date))
-      ..add(DiagnosticsProperty('alarm', alarm));
+      ..add(DiagnosticsProperty('noteModel', noteModel));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _AddNoteState &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
-            (identical(other.note, note) ||
-                const DeepCollectionEquality().equals(other.note, note)) &&
-            (identical(other.date, date) ||
-                const DeepCollectionEquality().equals(other.date, date)) &&
-            (identical(other.alarm, alarm) ||
-                const DeepCollectionEquality().equals(other.alarm, alarm)));
+            (identical(other.noteModel, noteModel) ||
+                const DeepCollectionEquality()
+                    .equals(other.noteModel, noteModel)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(note) ^
-      const DeepCollectionEquality().hash(date) ^
-      const DeepCollectionEquality().hash(alarm);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(noteModel);
 
   @JsonKey(ignore: true)
   @override
@@ -215,23 +168,13 @@ class _$_AddNoteState with DiagnosticableTreeMixin implements _AddNoteState {
 }
 
 abstract class _AddNoteState implements AddNoteState {
-  const factory _AddNoteState(
-      {required String title,
-      required String note,
-      DateTime? date,
-      DateTime? alarm}) = _$_AddNoteState;
+  const factory _AddNoteState({required NoteModel noteModel}) = _$_AddNoteState;
 
   factory _AddNoteState.fromJson(Map<String, dynamic> json) =
       _$_AddNoteState.fromJson;
 
   @override
-  String get title => throw _privateConstructorUsedError;
-  @override
-  String get note => throw _privateConstructorUsedError;
-  @override
-  DateTime? get date => throw _privateConstructorUsedError;
-  @override
-  DateTime? get alarm => throw _privateConstructorUsedError;
+  NoteModel get noteModel => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$AddNoteStateCopyWith<_AddNoteState> get copyWith =>

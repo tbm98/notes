@@ -1,21 +1,71 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notes/src/config/enums.dart';
+import 'package:notes/src/core/storage/storage.dart';
+import 'package:notes/src/di/get_it.dart';
+import 'package:notes/src/models/note_model.dart';
 import 'package:notes/src/ui/screens/add_note/add_note_state.dart';
+import 'package:notes/src/ui/screens/home/providers.dart';
 
 class AddNoteStateNotifier extends StateNotifier<AddNoteState> {
-  AddNoteStateNotifier() : super(AddNoteState.init());
+  AddNoteStateNotifier({required NoteType type, this.ref})
+      : super(AddNoteState.init(type));
 
-  void changedTitle(String value) => state = state.copyWith(title: value);
+  final ProviderRefBase? ref;
 
-  void changedNote(String value) => state = state.copyWith(note: value);
+  void changedTitle(String value) => state = state.copyWith(
+        noteModel: state.noteModel.copyWith(
+          title: value,
+        ),
+      );
 
-  void datePicked(DateTime dateTime) => state = state.copyWith(date: dateTime);
+  void changedNote(String value) => state = state.copyWith(
+        noteModel: state.noteModel.copyWith(
+          note: value,
+        ),
+      );
 
-  void alarmPicked(DateTime? dateTime) =>
-      state = state.copyWith(alarm: dateTime);
+  void datePicked(DateTime? dateTime) => state = state.copyWith(
+        noteModel: state.noteModel.copyWith(
+          time: dateTime?.millisecondsSinceEpoch,
+        ),
+      );
+
+  void alarmPicked(DateTime? dateTime) => state = state.copyWith(
+        noteModel: state.noteModel.copyWith(
+          alarm: dateTime?.millisecondsSinceEpoch,
+        ),
+      );
+
+  void toggleType() {
+    final currentType = state.noteModel.type;
+    final newType =
+        currentType == NoteType.todo ? NoteType.memory : NoteType.todo;
+    state = state.copyWith(noteModel: state.noteModel.copyWith(type: newType));
+  }
+
+  /// return a note to save to storage, if title and note is empty => return null
+  NoteModel? prepareForAddNote() {
+    if (state.noteModel.title.isEmpty && state.noteModel.note.isEmpty) {
+      return null;
+    }
+    return state.noteModel;
+  }
+
+  Future<void> saveNote(NoteModel noteModel) async {
+    await getIt<Storage>().addNote(noteModel);
+    ref?.read(allNoteProvider.notifier).getAllNote();
+  }
 }
+
+final addNotePreferTypeProvider = StateProvider<NoteType>((ref) {
+  final currentTab = ref.watch(currentTabProvider).state;
+
+  return currentTab == 0 ? NoteType.todo : NoteType.memory;
+});
 
 final addNoteProvider =
     StateNotifierProvider.autoDispose<AddNoteStateNotifier, AddNoteState>(
         (ref) {
-  return AddNoteStateNotifier();
+  final preferType = ref.watch(addNotePreferTypeProvider).state;
+  return AddNoteStateNotifier(type: preferType, ref: ref);
 });

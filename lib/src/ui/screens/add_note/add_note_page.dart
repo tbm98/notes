@@ -1,18 +1,19 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notes/src/models/note_model.dart';
 import 'package:notes/src/ui/screens/add_note/notice_note_info_widget.dart';
-import 'package:notes/src/ui/screens/add_note/notice_note_type_widget.dart';
 import 'package:notes/src/ui/screens/add_note/providers.dart';
-import 'package:notes/src/utils/time.dart';
 
-import 'add_note_tool_bar_widget.dart';
+import 'tool_bar/add_note_tool_bar_widget.dart';
 
 class AddNotePage extends ConsumerStatefulWidget {
   const AddNotePage({
     Key? key,
+    required this.returnValueCallback,
   }) : super(key: key);
+
+  final void Function({NoteModel? returnValue}) returnValueCallback;
 
   @override
   ConsumerState createState() => _AddNotePageState();
@@ -35,19 +36,18 @@ class _AddNotePageState extends ConsumerState<AddNotePage> {
     super.dispose();
   }
 
+  void _handleReturn() {
+    final noteModel = ref.read(addNoteProvider.notifier).prepareForAddNote();
+    widget.returnValueCallback(returnValue: noteModel);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(),
+        leading: BackButton(onPressed: _handleReturn),
         actions: [
-          IconButton(
-              onPressed: () async {
-                final date = await showDateTimePicker(context);
-                print('date:$date');
-                ref.read(addNoteProvider.notifier).alarmPicked(date);
-              },
-              icon: const Icon(Icons.add_alert_outlined))
+          IconButton(onPressed: _handleReturn, icon: const Icon(Icons.done))
         ],
       ),
       body: Stack(
@@ -69,6 +69,8 @@ class _AddNotePageState extends ConsumerState<AddNotePage> {
                       textInputAction: TextInputAction.done,
                       autofocus: true,
                       onSubmitted: (_) => _contentFocusNode.requestFocus(),
+                      onChanged:
+                          ref.read(addNoteProvider.notifier).changedTitle,
                     ),
                     const NoticeNoteInfoWidget(),
                     TextField(
@@ -79,6 +81,7 @@ class _AddNotePageState extends ConsumerState<AddNotePage> {
                       maxLines: null,
                       textInputAction: TextInputAction.newline,
                       focusNode: _contentFocusNode,
+                      onChanged: ref.read(addNoteProvider.notifier).changedNote,
                     ),
                   ],
                 ),
