@@ -42,7 +42,7 @@ class _AppState extends State<App> {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return const MyApp();
+          return const MyAwesomeApp();
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
@@ -52,8 +52,8 @@ class _AppState extends State<App> {
   }
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyAwesomeApp extends StatelessWidget {
+  const MyAwesomeApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
