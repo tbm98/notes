@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:notes/src/ui/screens/home/providers.dart';
+import 'package:notes/src/ui/screens/home/providers/tab_providers.dart';
 import 'package:notes/src/ui/screens/memories/memories_page.dart';
 import 'package:notes/src/ui/screens/todo/todo_page.dart';
 

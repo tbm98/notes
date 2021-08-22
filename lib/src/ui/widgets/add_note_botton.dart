@@ -35,7 +35,6 @@ class AddNoteButton extends ConsumerWidget {
         );
       },
       onClosed: (returnValue) async{
-        print('returnValue:${returnValue}');
         if (returnValue == null) {
           return;
         }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:notes/src/ui/screens/home/providers.dart';
+import 'package:notes/src/ui/screens/home/providers/tab_providers.dart';
 
 class BottomNaviBarWidget extends ConsumerWidget {
   const BottomNaviBarWidget({

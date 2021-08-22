@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notes/src/ui/screens/guest/guest_page.dart';
+import 'package:notes/src/ui/screens/home/providers/profile_providers.dart';
 import 'package:notes/src/utils/prepare_for_run_app.dart';
 
 import 'src/ui/screens/home/home_page.dart';
@@ -62,7 +64,15 @@ class MyAwesomeApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: Consumer(
+        builder: (context, ref, child) {
+          final user = ref.watch(profileProvider);
+          return user.map(
+            signedIn: (value) => const SignedInPage(),
+            guest: (value) => const GuestPage(),
+          );
+        },
+      ),
     );
   }
 }

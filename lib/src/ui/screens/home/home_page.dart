@@ -4,14 +4,16 @@ import 'package:notes/src/ui/widgets/avatar_widget.dart';
 import 'package:notes/src/ui/widgets/bottom_navi_bar_widget.dart';
 import 'package:notes/src/ui/widgets/my_page_view.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class SignedInPage extends StatelessWidget {
+  const SignedInPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(actions: const [AvatarWidget()]),
+      appBar: AppBar(actions: const [
+        Padding(padding: EdgeInsets.only(right: 8), child: AvatarWidget())
+      ]),
       body: MyPageView(),
       floatingActionButton: const AddNoteButton(),
       bottomNavigationBar: const BottomNaviBarWidget(),

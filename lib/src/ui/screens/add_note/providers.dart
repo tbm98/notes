@@ -4,7 +4,8 @@ import 'package:notes/src/core/storage/storage.dart';
 import 'package:notes/src/di/get_it.dart';
 import 'package:notes/src/models/note_model.dart';
 import 'package:notes/src/ui/screens/add_note/add_note_state.dart';
-import 'package:notes/src/ui/screens/home/providers.dart';
+import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
+import 'package:notes/src/ui/screens/home/providers/tab_providers.dart';
 
 class AddNoteStateNotifier extends StateNotifier<AddNoteState> {
   AddNoteStateNotifier({required NoteType type, this.ref})
@@ -47,6 +48,10 @@ class AddNoteStateNotifier extends StateNotifier<AddNoteState> {
   NoteModel? prepareForAddNote() {
     if (state.noteModel.title.isEmpty && state.noteModel.note.isEmpty) {
       return null;
+    }
+    if (state.noteModel.time == null) {
+      return state.noteModel
+          .copyWith(time: DateTime.now().millisecondsSinceEpoch);
     }
     return state.noteModel;
   }

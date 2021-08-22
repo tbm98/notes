@@ -7,14 +7,16 @@ class FirestoreStorage extends Storage {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
-  Future<void> addNote(NoteModel noteModel) {
+  Future<bool> addNote(NoteModel noteModel) async {
     // Create a CollectionReference called users that references the firestore collection
     CollectionReference users = firestore.collection('notes');
     // Call the user's CollectionReference to add a new user
-    return users
-        .add(noteModel.toJson())
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+    try {
+      await users.add(noteModel.toJson());
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
 
   @override
@@ -25,14 +27,16 @@ class FirestoreStorage extends Storage {
 
   @override
   Future<List<NoteModel>> getAllNote() async {
-    final querySnapshot = await firestore.collection('notes').get();
+    final querySnapshot = await firestore
+        .collection('notes')
+        .orderBy('time', descending: true)
+        .get();
     return querySnapshot.docs.map((e) => NoteModel.fromJson(e.data())).toList();
   }
 
   @visibleForTesting
   List<NoteModel> mapQuerySnapshotToListNode(
-    QuerySnapshot<Map<String, dynamic>> snapshot,
-  ) {
+      QuerySnapshot<Map<String, dynamic>> snapshot,) {
     return snapshot.docs.map((e) => NoteModel.fromJson(e.data())).toList();
   }
 
@@ -40,6 +44,7 @@ class FirestoreStorage extends Storage {
   Stream<List<NoteModel>> allNoteStream() {
     return firestore
         .collection('notes')
+        .orderBy('time', descending: true)
         .snapshots()
         .map(mapQuerySnapshotToListNode);
   }
