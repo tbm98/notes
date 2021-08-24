@@ -58,7 +58,6 @@ class AddNoteStateNotifier extends StateNotifier<AddNoteState> {
 
   Future<void> saveNote(NoteModel noteModel) async {
     await getIt<Storage>().addNote(noteModel);
-    ref?.read(allNoteProvider.notifier).getAllNote();
   }
 }
 

@@ -26,7 +26,9 @@ class _$NoteModelTearOff {
       @JsonKey(defaultValue: '') required String note,
       int? alarm,
       int? time,
-      @JsonKey(unknownEnumValue: NoteType.memory) required NoteType type}) {
+      @JsonKey(unknownEnumValue: NoteType.memory) required NoteType type,
+      @JsonKey(defaultValue: false) bool finished = false,
+      String? fbDocsId}) {
     return _NoteModel(
       id: id,
       title: title,
@@ -34,6 +36,8 @@ class _$NoteModelTearOff {
       alarm: alarm,
       time: time,
       type: type,
+      finished: finished,
+      fbDocsId: fbDocsId,
     );
   }
 
@@ -56,6 +60,9 @@ mixin _$NoteModel {
   int? get time => throw _privateConstructorUsedError;
   @JsonKey(unknownEnumValue: NoteType.memory)
   NoteType get type => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: false)
+  bool get finished => throw _privateConstructorUsedError;
+  String? get fbDocsId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -73,7 +80,9 @@ abstract class $NoteModelCopyWith<$Res> {
       @JsonKey(defaultValue: '') String note,
       int? alarm,
       int? time,
-      @JsonKey(unknownEnumValue: NoteType.memory) NoteType type});
+      @JsonKey(unknownEnumValue: NoteType.memory) NoteType type,
+      @JsonKey(defaultValue: false) bool finished,
+      String? fbDocsId});
 }
 
 /// @nodoc
@@ -92,6 +101,8 @@ class _$NoteModelCopyWithImpl<$Res> implements $NoteModelCopyWith<$Res> {
     Object? alarm = freezed,
     Object? time = freezed,
     Object? type = freezed,
+    Object? finished = freezed,
+    Object? fbDocsId = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -118,6 +129,14 @@ class _$NoteModelCopyWithImpl<$Res> implements $NoteModelCopyWith<$Res> {
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as NoteType,
+      finished: finished == freezed
+          ? _value.finished
+          : finished // ignore: cast_nullable_to_non_nullable
+              as bool,
+      fbDocsId: fbDocsId == freezed
+          ? _value.fbDocsId
+          : fbDocsId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -134,7 +153,9 @@ abstract class _$NoteModelCopyWith<$Res> implements $NoteModelCopyWith<$Res> {
       @JsonKey(defaultValue: '') String note,
       int? alarm,
       int? time,
-      @JsonKey(unknownEnumValue: NoteType.memory) NoteType type});
+      @JsonKey(unknownEnumValue: NoteType.memory) NoteType type,
+      @JsonKey(defaultValue: false) bool finished,
+      String? fbDocsId});
 }
 
 /// @nodoc
@@ -154,6 +175,8 @@ class __$NoteModelCopyWithImpl<$Res> extends _$NoteModelCopyWithImpl<$Res>
     Object? alarm = freezed,
     Object? time = freezed,
     Object? type = freezed,
+    Object? finished = freezed,
+    Object? fbDocsId = freezed,
   }) {
     return _then(_NoteModel(
       id: id == freezed
@@ -180,6 +203,14 @@ class __$NoteModelCopyWithImpl<$Res> extends _$NoteModelCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as NoteType,
+      finished: finished == freezed
+          ? _value.finished
+          : finished // ignore: cast_nullable_to_non_nullable
+              as bool,
+      fbDocsId: fbDocsId == freezed
+          ? _value.fbDocsId
+          : fbDocsId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -194,7 +225,9 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
       @JsonKey(defaultValue: '') required this.note,
       this.alarm,
       this.time,
-      @JsonKey(unknownEnumValue: NoteType.memory) required this.type})
+      @JsonKey(unknownEnumValue: NoteType.memory) required this.type,
+      @JsonKey(defaultValue: false) this.finished = false,
+      this.fbDocsId})
       : super._();
 
   factory _$_NoteModel.fromJson(Map<String, dynamic> json) =>
@@ -215,10 +248,15 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
   @override
   @JsonKey(unknownEnumValue: NoteType.memory)
   final NoteType type;
+  @override
+  @JsonKey(defaultValue: false)
+  final bool finished;
+  @override
+  final String? fbDocsId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NoteModel(id: $id, title: $title, note: $note, alarm: $alarm, time: $time, type: $type)';
+    return 'NoteModel(id: $id, title: $title, note: $note, alarm: $alarm, time: $time, type: $type, finished: $finished, fbDocsId: $fbDocsId)';
   }
 
   @override
@@ -231,7 +269,9 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('note', note))
       ..add(DiagnosticsProperty('alarm', alarm))
       ..add(DiagnosticsProperty('time', time))
-      ..add(DiagnosticsProperty('type', type));
+      ..add(DiagnosticsProperty('type', type))
+      ..add(DiagnosticsProperty('finished', finished))
+      ..add(DiagnosticsProperty('fbDocsId', fbDocsId));
   }
 
   @override
@@ -249,7 +289,13 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
             (identical(other.time, time) ||
                 const DeepCollectionEquality().equals(other.time, time)) &&
             (identical(other.type, type) ||
-                const DeepCollectionEquality().equals(other.type, type)));
+                const DeepCollectionEquality().equals(other.type, type)) &&
+            (identical(other.finished, finished) ||
+                const DeepCollectionEquality()
+                    .equals(other.finished, finished)) &&
+            (identical(other.fbDocsId, fbDocsId) ||
+                const DeepCollectionEquality()
+                    .equals(other.fbDocsId, fbDocsId)));
   }
 
   @override
@@ -260,7 +306,9 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(note) ^
       const DeepCollectionEquality().hash(alarm) ^
       const DeepCollectionEquality().hash(time) ^
-      const DeepCollectionEquality().hash(type);
+      const DeepCollectionEquality().hash(type) ^
+      const DeepCollectionEquality().hash(finished) ^
+      const DeepCollectionEquality().hash(fbDocsId);
 
   @JsonKey(ignore: true)
   @override
@@ -275,13 +323,14 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
 
 abstract class _NoteModel extends NoteModel {
   const factory _NoteModel(
-          {required String id,
-          @JsonKey(defaultValue: '') required String title,
-          @JsonKey(defaultValue: '') required String note,
-          int? alarm,
-          int? time,
-          @JsonKey(unknownEnumValue: NoteType.memory) required NoteType type}) =
-      _$_NoteModel;
+      {required String id,
+      @JsonKey(defaultValue: '') required String title,
+      @JsonKey(defaultValue: '') required String note,
+      int? alarm,
+      int? time,
+      @JsonKey(unknownEnumValue: NoteType.memory) required NoteType type,
+      @JsonKey(defaultValue: false) bool finished,
+      String? fbDocsId}) = _$_NoteModel;
   const _NoteModel._() : super._();
 
   factory _NoteModel.fromJson(Map<String, dynamic> json) =
@@ -302,6 +351,11 @@ abstract class _NoteModel extends NoteModel {
   @override
   @JsonKey(unknownEnumValue: NoteType.memory)
   NoteType get type => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(defaultValue: false)
+  bool get finished => throw _privateConstructorUsedError;
+  @override
+  String? get fbDocsId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$NoteModelCopyWith<_NoteModel> get copyWith =>

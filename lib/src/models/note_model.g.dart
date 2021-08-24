@@ -15,6 +15,8 @@ _$_NoteModel _$_$_NoteModelFromJson(Map<String, dynamic> json) {
     time: json['time'] as int?,
     type: _$enumDecode(_$NoteTypeEnumMap, json['type'],
         unknownValue: NoteType.memory),
+    finished: json['finished'] as bool? ?? false,
+    fbDocsId: json['fb_docs_id'] as String?,
   );
 }
 
@@ -26,6 +28,8 @@ Map<String, dynamic> _$_$_NoteModelToJson(_$_NoteModel instance) =>
       'alarm': instance.alarm,
       'time': instance.time,
       'type': _$NoteTypeEnumMap[instance.type],
+      'finished': instance.finished,
+      'fb_docs_id': instance.fbDocsId,
     };
 
 K _$enumDecode<K, V>(

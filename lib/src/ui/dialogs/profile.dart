@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notes/src/config/global_constant.dart';
 import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
 import 'package:notes/src/ui/screens/home/providers/profile_providers.dart';
+import 'package:notes/src/ui/screens/todo/providers.dart';
 import 'package:notes/src/ui/widgets/avatar_widget.dart';
 
 Future<void> showProfileDialog(BuildContext context) async {
@@ -82,7 +83,13 @@ class _DataInfo extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final todos = ref
-        .watch(todoNoteProvider)
+        .watch(todoProvider)
+        .map(data: (value) => value.noteModel.length, init: (_) => 0);
+    final finishedTodos = ref
+        .watch(finishedTodoProvider)
+        .map(data: (value) => value.noteModel.length, init: (_) => 0);
+    final unfinishedTodos = ref
+        .watch(unfinishedTodoProvider)
         .map(data: (value) => value.noteModel.length, init: (_) => 0);
     final memories = ref
         .watch(memoriesNoteProvider)
@@ -94,7 +101,7 @@ class _DataInfo extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Todo count: $todos'),
+          Text('Todo count: $todos ($unfinishedTodos unfinished, $finishedTodos done)'),
           Text('Memory count: $memories'),
           Text('join date'), // TODO: implement join date
         ],

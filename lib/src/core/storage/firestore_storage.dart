@@ -20,7 +20,7 @@ class FirestoreStorage extends Storage {
   }
 
   @override
-  Future<bool> deleteNote(String id) {
+  Future<bool> deleteNote(NoteModel noteModel) {
     // TODO: implement deleteNote
     throw UnimplementedError();
   }
@@ -31,13 +31,18 @@ class FirestoreStorage extends Storage {
         .collection('notes')
         .orderBy('time', descending: true)
         .get();
-    return querySnapshot.docs.map((e) => NoteModel.fromJson(e.data())).toList();
+    return querySnapshot.docs
+        .map((e) => NoteModel.fromJson(e.data()).copyWith(fbDocsId: e.id))
+        .toList();
   }
 
   @visibleForTesting
   List<NoteModel> mapQuerySnapshotToListNode(
-      QuerySnapshot<Map<String, dynamic>> snapshot,) {
-    return snapshot.docs.map((e) => NoteModel.fromJson(e.data())).toList();
+    QuerySnapshot<Map<String, dynamic>> snapshot,
+  ) {
+    return snapshot.docs
+        .map((e) => NoteModel.fromJson(e.data()).copyWith(fbDocsId: e.id))
+        .toList();
   }
 
   @override
@@ -47,5 +52,18 @@ class FirestoreStorage extends Storage {
         .orderBy('time', descending: true)
         .snapshots()
         .map(mapQuerySnapshotToListNode);
+  }
+
+  @override
+  Future<bool> updateNote(NoteModel noteModel) async {
+    try {
+      await firestore
+          .collection('notes')
+          .doc(noteModel.fbDocsId)
+          .update(noteModel.toJson());
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
 }
