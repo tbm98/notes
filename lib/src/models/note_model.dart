@@ -19,12 +19,10 @@ class NoteModel with _$NoteModel {
     @JsonKey(defaultValue: '') required String note,
     int? alarm,
     int? time,
-    @JsonKey(unknownEnumValue: NoteType.memory)
-    required NoteType type,
-    @JsonKey(defaultValue: false)
-    @Default(false)
-    bool finished,
+    @JsonKey(unknownEnumValue: NoteType.memory) required NoteType type,
+    @JsonKey(defaultValue: false) @Default(false) bool finished,
     String? fbDocsId,
+    @Default(false) bool movedToTrash,
   }) = _NoteModel;
 
   DateTime? get alarmDate {

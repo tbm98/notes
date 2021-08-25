@@ -1,78 +1,54 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notes/main.dart';
 import 'package:notes/src/models/note_model.dart';
 import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
-import 'package:notes/src/ui/screens/todo/providers.dart';
+import 'package:notes/src/ui/screens/trash/providers.dart';
 
-class TodoPage extends ConsumerWidget {
-  const TodoPage({
+class TrashPage extends ConsumerWidget {
+  const TrashPage({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todos = ref.watch(todoProvider);
-    return todos.map(
-      data: (value) {
-        if (value.noteModel.isEmpty) {
-          return const Center(
-            child: Text('Todo empty!'),
-          );
-        }
-        return SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              _SectionTodoListByStatus(finished: false),
-              _SectionTodoListByStatus(finished: true)
-            ],
-          ),
-        );
-      },
-      init: (_) {
-        return const SizedBox();
-      },
-    );
+    final trashes = ref.watch(trashProvider);
+
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Trash'),
+        ),
+        body: const _TrashBody());
   }
 }
 
-class _SectionTodoListByStatus extends ConsumerWidget {
-  const _SectionTodoListByStatus({
+class _TrashBody extends ConsumerWidget {
+  const _TrashBody({
     Key? key,
-    required this.finished,
   }) : super(key: key);
-  final bool finished;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todos = finished
-        ? ref.watch(finishedTodoProvider)
-        : ref.watch(unfinishedTodoProvider);
-    return todos.map(
+    final trashes = ref.watch(trashProvider);
+    return trashes.map(
       init: (_) => const SizedBox(),
       data: (value) {
         if (value.noteModel.isEmpty) {
-          return const SizedBox();
+          return const Center(
+            child: Text('Trash is empty'),
+          );
         }
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(finished ? 'finished' : 'unfinished'),
-            _TodoListRaw(noteModels: value.noteModel),
-          ],
-        );
+        return _TrashListRaw(noteModels: value.noteModel);
       },
     );
   }
 }
 
-class _TodoListRaw extends ConsumerWidget {
-  const _TodoListRaw({
+class _TrashListRaw extends ConsumerWidget {
+  const _TrashListRaw({
     Key? key,
     required this.noteModels,
   }) : super(key: key);
-
   final List<NoteModel> noteModels;
 
   @override
@@ -87,7 +63,7 @@ class _TodoListRaw extends ConsumerWidget {
             ? const TextStyle(decoration: TextDecoration.lineThrough)
             : const TextStyle();
         return ListTile(
-          key: ValueKey<String>('todo-$index-finished=$finished'),
+          key: ValueKey<String>('trash-$index'),
           tileColor: finished ? Colors.grey : null,
           title: Text(
             noteModels[index].title,
@@ -101,19 +77,18 @@ class _TodoListRaw extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Checkbox(
-                onChanged: (bool? value) {
-                  ref
-                      .read(allNoteProvider.notifier)
-                      .updateNote(noteModels[index].copyWith(finished: value!));
-                },
+                onChanged: null,
                 value: noteModels[index].finished,
               ),
               IconButton(
                   onPressed: () {
                     ref.read(allNoteProvider.notifier).updateNote(
-                        noteModels[index].copyWith(movedToTrash: true));
+                        noteModels[index].copyWith(movedToTrash: false));
                   },
-                  icon: const Icon(CupertinoIcons.trash))
+                  icon: Icon(
+                    Icons.restore,
+                    color: Theme.of(context).primaryColor,
+                  ))
             ],
           ),
         );

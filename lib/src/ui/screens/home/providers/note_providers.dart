@@ -42,16 +42,3 @@ final allNoteProvider =
 
   return allNoteNotifier;
 });
-
-final memoriesNoteProvider = Provider.autoDispose<NoteState>((ref) {
-  final allNote = ref.watch(allNoteProvider);
-
-  return allNote.map(data: (value) {
-    return NoteState.data(
-        noteModel: value.noteModel
-            .where((element) => element.type == NoteType.memory)
-            .toList());
-  }, init: (value) {
-    return value;
-  });
-});

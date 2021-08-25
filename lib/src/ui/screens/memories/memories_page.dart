@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
+import 'package:notes/src/ui/screens/memories/providers.dart';
 
 class MemoriesPage extends ConsumerWidget {
   const MemoriesPage({

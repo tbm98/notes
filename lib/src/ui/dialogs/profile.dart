@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notes/src/config/global_constant.dart';
-import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
 import 'package:notes/src/ui/screens/home/providers/profile_providers.dart';
+import 'package:notes/src/ui/screens/memories/providers.dart';
 import 'package:notes/src/ui/screens/todo/providers.dart';
 import 'package:notes/src/ui/widgets/avatar_widget.dart';
 

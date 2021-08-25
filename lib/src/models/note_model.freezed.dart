@@ -28,7 +28,8 @@ class _$NoteModelTearOff {
       int? time,
       @JsonKey(unknownEnumValue: NoteType.memory) required NoteType type,
       @JsonKey(defaultValue: false) bool finished = false,
-      String? fbDocsId}) {
+      String? fbDocsId,
+      bool movedToTrash = false}) {
     return _NoteModel(
       id: id,
       title: title,
@@ -38,6 +39,7 @@ class _$NoteModelTearOff {
       type: type,
       finished: finished,
       fbDocsId: fbDocsId,
+      movedToTrash: movedToTrash,
     );
   }
 
@@ -63,6 +65,7 @@ mixin _$NoteModel {
   @JsonKey(defaultValue: false)
   bool get finished => throw _privateConstructorUsedError;
   String? get fbDocsId => throw _privateConstructorUsedError;
+  bool get movedToTrash => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -82,7 +85,8 @@ abstract class $NoteModelCopyWith<$Res> {
       int? time,
       @JsonKey(unknownEnumValue: NoteType.memory) NoteType type,
       @JsonKey(defaultValue: false) bool finished,
-      String? fbDocsId});
+      String? fbDocsId,
+      bool movedToTrash});
 }
 
 /// @nodoc
@@ -103,6 +107,7 @@ class _$NoteModelCopyWithImpl<$Res> implements $NoteModelCopyWith<$Res> {
     Object? type = freezed,
     Object? finished = freezed,
     Object? fbDocsId = freezed,
+    Object? movedToTrash = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -137,6 +142,10 @@ class _$NoteModelCopyWithImpl<$Res> implements $NoteModelCopyWith<$Res> {
           ? _value.fbDocsId
           : fbDocsId // ignore: cast_nullable_to_non_nullable
               as String?,
+      movedToTrash: movedToTrash == freezed
+          ? _value.movedToTrash
+          : movedToTrash // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -155,7 +164,8 @@ abstract class _$NoteModelCopyWith<$Res> implements $NoteModelCopyWith<$Res> {
       int? time,
       @JsonKey(unknownEnumValue: NoteType.memory) NoteType type,
       @JsonKey(defaultValue: false) bool finished,
-      String? fbDocsId});
+      String? fbDocsId,
+      bool movedToTrash});
 }
 
 /// @nodoc
@@ -177,6 +187,7 @@ class __$NoteModelCopyWithImpl<$Res> extends _$NoteModelCopyWithImpl<$Res>
     Object? type = freezed,
     Object? finished = freezed,
     Object? fbDocsId = freezed,
+    Object? movedToTrash = freezed,
   }) {
     return _then(_NoteModel(
       id: id == freezed
@@ -211,6 +222,10 @@ class __$NoteModelCopyWithImpl<$Res> extends _$NoteModelCopyWithImpl<$Res>
           ? _value.fbDocsId
           : fbDocsId // ignore: cast_nullable_to_non_nullable
               as String?,
+      movedToTrash: movedToTrash == freezed
+          ? _value.movedToTrash
+          : movedToTrash // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -227,7 +242,8 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
       this.time,
       @JsonKey(unknownEnumValue: NoteType.memory) required this.type,
       @JsonKey(defaultValue: false) this.finished = false,
-      this.fbDocsId})
+      this.fbDocsId,
+      this.movedToTrash = false})
       : super._();
 
   factory _$_NoteModel.fromJson(Map<String, dynamic> json) =>
@@ -253,10 +269,13 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
   final bool finished;
   @override
   final String? fbDocsId;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool movedToTrash;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NoteModel(id: $id, title: $title, note: $note, alarm: $alarm, time: $time, type: $type, finished: $finished, fbDocsId: $fbDocsId)';
+    return 'NoteModel(id: $id, title: $title, note: $note, alarm: $alarm, time: $time, type: $type, finished: $finished, fbDocsId: $fbDocsId, movedToTrash: $movedToTrash)';
   }
 
   @override
@@ -271,7 +290,8 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('time', time))
       ..add(DiagnosticsProperty('type', type))
       ..add(DiagnosticsProperty('finished', finished))
-      ..add(DiagnosticsProperty('fbDocsId', fbDocsId));
+      ..add(DiagnosticsProperty('fbDocsId', fbDocsId))
+      ..add(DiagnosticsProperty('movedToTrash', movedToTrash));
   }
 
   @override
@@ -295,7 +315,10 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
                     .equals(other.finished, finished)) &&
             (identical(other.fbDocsId, fbDocsId) ||
                 const DeepCollectionEquality()
-                    .equals(other.fbDocsId, fbDocsId)));
+                    .equals(other.fbDocsId, fbDocsId)) &&
+            (identical(other.movedToTrash, movedToTrash) ||
+                const DeepCollectionEquality()
+                    .equals(other.movedToTrash, movedToTrash)));
   }
 
   @override
@@ -308,7 +331,8 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(time) ^
       const DeepCollectionEquality().hash(type) ^
       const DeepCollectionEquality().hash(finished) ^
-      const DeepCollectionEquality().hash(fbDocsId);
+      const DeepCollectionEquality().hash(fbDocsId) ^
+      const DeepCollectionEquality().hash(movedToTrash);
 
   @JsonKey(ignore: true)
   @override
@@ -330,7 +354,8 @@ abstract class _NoteModel extends NoteModel {
       int? time,
       @JsonKey(unknownEnumValue: NoteType.memory) required NoteType type,
       @JsonKey(defaultValue: false) bool finished,
-      String? fbDocsId}) = _$_NoteModel;
+      String? fbDocsId,
+      bool movedToTrash}) = _$_NoteModel;
   const _NoteModel._() : super._();
 
   factory _NoteModel.fromJson(Map<String, dynamic> json) =
@@ -356,6 +381,8 @@ abstract class _NoteModel extends NoteModel {
   bool get finished => throw _privateConstructorUsedError;
   @override
   String? get fbDocsId => throw _privateConstructorUsedError;
+  @override
+  bool get movedToTrash => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$NoteModelCopyWith<_NoteModel> get copyWith =>

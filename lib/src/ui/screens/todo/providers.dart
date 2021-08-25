@@ -3,8 +3,21 @@ import 'package:notes/src/config/enums.dart';
 import 'package:notes/src/ui/screens/home/note_state.dart';
 import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
 
-final todoProvider = Provider.autoDispose<NoteState>((ref) {
+final notTrashProvider = Provider.autoDispose<NoteState>((ref) {
   final allNote = ref.watch(allNoteProvider);
+
+  return allNote.map(data: (value) {
+    return NoteState.data(
+        noteModel: value.noteModel
+            .where((element) => element.movedToTrash == false)
+            .toList());
+  }, init: (value) {
+    return value;
+  });
+});
+
+final todoProvider = Provider.autoDispose<NoteState>((ref) {
+  final allNote = ref.watch(notTrashProvider);
 
   return allNote.map(data: (value) {
     return NoteState.data(
