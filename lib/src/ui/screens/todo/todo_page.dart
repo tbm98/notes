@@ -109,9 +109,21 @@ class _TodoListRaw extends ConsumerWidget {
                 value: noteModels[index].finished,
               ),
               IconButton(
-                  onPressed: () {
-                    ref.read(allNoteProvider.notifier).updateNote(
+                  onPressed: () async {
+                    final scaffoldMessager = ScaffoldMessenger.of(context);
+                    final allNoteNotifier = ref.read(allNoteProvider.notifier);
+                    await allNoteNotifier.updateNote(
                         noteModels[index].copyWith(movedToTrash: true));
+                    scaffoldMessager.showSnackBar(SnackBar(
+                      content: Text('moved 1 note to trash'),
+                      action: SnackBarAction(
+                        label: 'Undo',
+                        onPressed: () {
+                          allNoteNotifier.updateNote(
+                              noteModels[index].copyWith(movedToTrash: false));
+                        },
+                      ),
+                    ));
                   },
                   icon: const Icon(CupertinoIcons.trash))
             ],
