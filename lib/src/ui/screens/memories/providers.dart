@@ -8,7 +8,7 @@ final memoriesNoteProvider = Provider.autoDispose<NoteState>((ref) {
 
   return allNote.map(data: (value) {
     return NoteState.data(
-        noteModel: value.noteModel
+        noteModels: value.noteModels
             .where((element) => element.type == NoteType.memory)
             .toList());
   }, init: (value) {

@@ -20,9 +20,13 @@ class FirestoreStorage extends Storage {
   }
 
   @override
-  Future<bool> deleteNote(NoteModel noteModel) {
-    // TODO: implement deleteNote
-    throw UnimplementedError();
+  Future<bool> deleteNote(NoteModel noteModel) async {
+    try {
+      await firestore.collection('notes').doc(noteModel.fbDocsId).delete();
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
 
   @override

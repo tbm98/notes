@@ -17,7 +17,7 @@ class AllNoteNotifier extends StateNotifier<NoteState> {
   void init() {
     _allNoteStreamSubscription =
         getIt<Storage>().allNoteStream().listen((event) {
-      state = NoteState.data(noteModel: event);
+      state = NoteState.data(noteModels: event);
     });
   }
 

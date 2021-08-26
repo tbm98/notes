@@ -5,6 +5,7 @@ import 'package:notes/src/ui/screens/home/providers/profile_providers.dart';
 import 'package:notes/src/ui/screens/memories/providers.dart';
 import 'package:notes/src/ui/screens/todo/providers.dart';
 import 'package:notes/src/ui/widgets/avatar_widget.dart';
+import 'package:notes/src/utils/truncated_email.dart';
 
 Future<void> showProfileDialog(BuildContext context) async {
   await showDialog(
@@ -64,7 +65,7 @@ class _UserInfoWidget extends ConsumerWidget {
             child: ListTile(
               contentPadding: const EdgeInsets.all(0),
               title: Text(value.displayName ?? ''),
-              subtitle: Text(value.email ?? ''),
+              subtitle: Text(truncatedEmail(value.email ?? '')),
             ),
           ),
         ],
@@ -84,16 +85,16 @@ class _DataInfo extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final todos = ref
         .watch(todoProvider)
-        .map(data: (value) => value.noteModel.length, init: (_) => 0);
+        .map(data: (value) => value.noteModels.length, init: (_) => 0);
     final finishedTodos = ref
         .watch(finishedTodoProvider)
-        .map(data: (value) => value.noteModel.length, init: (_) => 0);
+        .map(data: (value) => value.noteModels.length, init: (_) => 0);
     final unfinishedTodos = ref
         .watch(unfinishedTodoProvider)
-        .map(data: (value) => value.noteModel.length, init: (_) => 0);
+        .map(data: (value) => value.noteModels.length, init: (_) => 0);
     final memories = ref
         .watch(memoriesNoteProvider)
-        .map(data: (value) => value.noteModel.length, init: (_) => 0);
+        .map(data: (value) => value.noteModels.length, init: (_) => 0);
     return Container(
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.only(left: avatarSize + 8),
@@ -101,7 +102,8 @@ class _DataInfo extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Todo count: $todos ($unfinishedTodos unfinished, $finishedTodos done)'),
+          Text(
+              'Todo count: $todos ($unfinishedTodos unfinished, $finishedTodos done)'),
           Text('Memory count: $memories'),
           Text('join date'), // TODO: implement join date
         ],

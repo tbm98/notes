@@ -10,7 +10,7 @@ part 'note_state.g.dart';
 class NoteState with _$NoteState {
   @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory NoteState.data({
-    required List<NoteModel> noteModel,
+    required List<NoteModel> noteModels,
   }) = NoteStateData;
 
   const factory NoteState.init() = NoteStateInit;

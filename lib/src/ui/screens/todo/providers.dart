@@ -8,7 +8,7 @@ final notTrashProvider = Provider.autoDispose<NoteState>((ref) {
 
   return allNote.map(data: (value) {
     return NoteState.data(
-        noteModel: value.noteModel
+        noteModels: value.noteModels
             .where((element) => element.movedToTrash == false)
             .toList());
   }, init: (value) {
@@ -21,7 +21,7 @@ final todoProvider = Provider.autoDispose<NoteState>((ref) {
 
   return allNote.map(data: (value) {
     return NoteState.data(
-        noteModel: value.noteModel
+        noteModels: value.noteModels
             .where((element) => element.type == NoteType.todo)
             .toList());
   }, init: (value) {
@@ -33,7 +33,7 @@ final unfinishedTodoProvider = Provider.autoDispose<NoteState>((ref) {
   final todos = ref.watch(todoProvider);
   return todos.map(data: (value) {
     return NoteState.data(
-        noteModel: value.noteModel
+        noteModels: value.noteModels
             .where((element) => element.finished == false)
             .toList());
   }, init: (value) {
@@ -45,7 +45,7 @@ final finishedTodoProvider = Provider.autoDispose<NoteState>((ref) {
   final todos = ref.watch(todoProvider);
   return todos.map(data: (value) {
     return NoteState.data(
-        noteModel: value.noteModel
+        noteModels: value.noteModels
             .where((element) => element.finished == true)
             .toList());
   }, init: (value) {

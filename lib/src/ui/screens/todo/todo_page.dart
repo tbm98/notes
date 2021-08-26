@@ -15,7 +15,7 @@ class TodoPage extends ConsumerWidget {
     final todos = ref.watch(todoProvider);
     return todos.map(
       data: (value) {
-        if (value.noteModel.isEmpty) {
+        if (value.noteModels.isEmpty) {
           return const Center(
             child: Text('Todo empty!'),
           );
@@ -52,14 +52,14 @@ class _SectionTodoListByStatus extends ConsumerWidget {
     return todos.map(
       init: (_) => const SizedBox(),
       data: (value) {
-        if (value.noteModel.isEmpty) {
+        if (value.noteModels.isEmpty) {
           return const SizedBox();
         }
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(finished ? 'finished' : 'unfinished'),
-            _TodoListRaw(noteModels: value.noteModel),
+            _TodoListRaw(noteModels: value.noteModels),
           ],
         );
       },
@@ -94,7 +94,7 @@ class _TodoListRaw extends ConsumerWidget {
             style: textStyle,
           ),
           subtitle: Text(
-            noteModels[index].fbDocsId ?? '',
+            noteModels[index].note,
             style: textStyle,
           ),
           trailing: Row(

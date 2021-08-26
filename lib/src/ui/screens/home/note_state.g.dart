@@ -8,7 +8,7 @@ part of 'note_state.dart';
 
 _$NoteStateData _$_$NoteStateDataFromJson(Map<String, dynamic> json) {
   return _$NoteStateData(
-    noteModel: (json['note_model'] as List<dynamic>)
+    noteModels: (json['note_models'] as List<dynamic>)
         .map((e) => NoteModel.fromJson(e as Map<String, dynamic>))
         .toList(),
   );
@@ -16,7 +16,7 @@ _$NoteStateData _$_$NoteStateDataFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$_$NoteStateDataToJson(_$NoteStateData instance) =>
     <String, dynamic>{
-      'note_model': instance.noteModel.map((e) => e.toJson()).toList(),
+      'note_models': instance.noteModels.map((e) => e.toJson()).toList(),
     };
 
 _$NoteStateInit _$_$NoteStateInitFromJson(Map<String, dynamic> json) {

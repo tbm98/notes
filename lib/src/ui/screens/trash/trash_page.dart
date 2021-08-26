@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notes/main.dart';
 import 'package:notes/src/models/note_model.dart';
+import 'package:notes/src/ui/dialogs/trash.dart';
 import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
 import 'package:notes/src/ui/screens/trash/providers.dart';
 
@@ -12,11 +14,23 @@ class TrashPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final trashes = ref.watch(trashProvider);
-
     return Scaffold(
         appBar: AppBar(
-          title: Text('Trash'),
+          title: const Text('Trash'),
+          actions: [
+            IconButton(
+                onPressed: () async {
+                  final result = await showConfirmEmptyTrashDialog(context);
+                  if (result) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Trash is empty')));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: const Text('Fail to empty trash')));
+                  }
+                },
+                icon: const Icon(CupertinoIcons.trash_slash))
+          ],
         ),
         body: const _TrashBody());
   }
@@ -33,12 +47,12 @@ class _TrashBody extends ConsumerWidget {
     return trashes.map(
       init: (_) => const SizedBox(),
       data: (value) {
-        if (value.noteModel.isEmpty) {
+        if (value.noteModels.isEmpty) {
           return const Center(
             child: Text('Trash is empty'),
           );
         }
-        return _TrashListRaw(noteModels: value.noteModel);
+        return _TrashListRaw(noteModels: value.noteModels);
       },
     );
   }

@@ -28,9 +28,9 @@ NoteState _$NoteStateFromJson(Map<String, dynamic> json) {
 class _$NoteStateTearOff {
   const _$NoteStateTearOff();
 
-  NoteStateData data({required List<NoteModel> noteModel}) {
+  NoteStateData data({required List<NoteModel> noteModels}) {
     return NoteStateData(
-      noteModel: noteModel,
+      noteModels: noteModels,
     );
   }
 
@@ -50,13 +50,13 @@ const $NoteState = _$NoteStateTearOff();
 mixin _$NoteState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<NoteModel> noteModel) data,
+    required TResult Function(List<NoteModel> noteModels) data,
     required TResult Function() init,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<NoteModel> noteModel)? data,
+    TResult Function(List<NoteModel> noteModels)? data,
     TResult Function()? init,
     required TResult orElse(),
   }) =>
@@ -97,7 +97,7 @@ abstract class $NoteStateDataCopyWith<$Res> {
   factory $NoteStateDataCopyWith(
           NoteStateData value, $Res Function(NoteStateData) then) =
       _$NoteStateDataCopyWithImpl<$Res>;
-  $Res call({List<NoteModel> noteModel});
+  $Res call({List<NoteModel> noteModels});
 }
 
 /// @nodoc
@@ -112,12 +112,12 @@ class _$NoteStateDataCopyWithImpl<$Res> extends _$NoteStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? noteModel = freezed,
+    Object? noteModels = freezed,
   }) {
     return _then(NoteStateData(
-      noteModel: noteModel == freezed
-          ? _value.noteModel
-          : noteModel // ignore: cast_nullable_to_non_nullable
+      noteModels: noteModels == freezed
+          ? _value.noteModels
+          : noteModels // ignore: cast_nullable_to_non_nullable
               as List<NoteModel>,
     ));
   }
@@ -127,17 +127,17 @@ class _$NoteStateDataCopyWithImpl<$Res> extends _$NoteStateCopyWithImpl<$Res>
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class _$NoteStateData with DiagnosticableTreeMixin implements NoteStateData {
-  const _$NoteStateData({required this.noteModel});
+  const _$NoteStateData({required this.noteModels});
 
   factory _$NoteStateData.fromJson(Map<String, dynamic> json) =>
       _$_$NoteStateDataFromJson(json);
 
   @override
-  final List<NoteModel> noteModel;
+  final List<NoteModel> noteModels;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NoteState.data(noteModel: $noteModel)';
+    return 'NoteState.data(noteModels: $noteModels)';
   }
 
   @override
@@ -145,21 +145,21 @@ class _$NoteStateData with DiagnosticableTreeMixin implements NoteStateData {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NoteState.data'))
-      ..add(DiagnosticsProperty('noteModel', noteModel));
+      ..add(DiagnosticsProperty('noteModels', noteModels));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is NoteStateData &&
-            (identical(other.noteModel, noteModel) ||
+            (identical(other.noteModels, noteModels) ||
                 const DeepCollectionEquality()
-                    .equals(other.noteModel, noteModel)));
+                    .equals(other.noteModels, noteModels)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(noteModel);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(noteModels);
 
   @JsonKey(ignore: true)
   @override
@@ -169,21 +169,21 @@ class _$NoteStateData with DiagnosticableTreeMixin implements NoteStateData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<NoteModel> noteModel) data,
+    required TResult Function(List<NoteModel> noteModels) data,
     required TResult Function() init,
   }) {
-    return data(noteModel);
+    return data(noteModels);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<NoteModel> noteModel)? data,
+    TResult Function(List<NoteModel> noteModels)? data,
     TResult Function()? init,
     required TResult orElse(),
   }) {
     if (data != null) {
-      return data(noteModel);
+      return data(noteModels);
     }
     return orElse();
   }
@@ -217,13 +217,13 @@ class _$NoteStateData with DiagnosticableTreeMixin implements NoteStateData {
 }
 
 abstract class NoteStateData implements NoteState {
-  const factory NoteStateData({required List<NoteModel> noteModel}) =
+  const factory NoteStateData({required List<NoteModel> noteModels}) =
       _$NoteStateData;
 
   factory NoteStateData.fromJson(Map<String, dynamic> json) =
       _$NoteStateData.fromJson;
 
-  List<NoteModel> get noteModel => throw _privateConstructorUsedError;
+  List<NoteModel> get noteModels => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $NoteStateDataCopyWith<NoteStateData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -277,7 +277,7 @@ class _$NoteStateInit with DiagnosticableTreeMixin implements NoteStateInit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<NoteModel> noteModel) data,
+    required TResult Function(List<NoteModel> noteModels) data,
     required TResult Function() init,
   }) {
     return init();
@@ -286,7 +286,7 @@ class _$NoteStateInit with DiagnosticableTreeMixin implements NoteStateInit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<NoteModel> noteModel)? data,
+    TResult Function(List<NoteModel> noteModels)? data,
     TResult Function()? init,
     required TResult orElse(),
   }) {

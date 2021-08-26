@@ -12,17 +12,17 @@ class MemoriesPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final memories = ref.watch(memoriesNoteProvider);
     return memories.map(data: (value) {
-      if (value.noteModel.isEmpty) {
+      if (value.noteModels.isEmpty) {
         return const Center(
           child: Text('Memory empty!'),
         );
       }
       return ListView.builder(
-        itemCount: value.noteModel.length,
+        itemCount: value.noteModels.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(value.noteModel[index].title),
-            subtitle: Text(value.noteModel[index].note),
+            title: Text(value.noteModels[index].title),
+            subtitle: Text(value.noteModels[index].note),
           );
         },
       );
