@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:notes/main.dart';
 import 'package:notes/src/models/note_model.dart';
 import 'package:notes/src/ui/dialogs/trash.dart';
 import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
@@ -44,17 +43,16 @@ class _TrashBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final trashes = ref.watch(trashProvider);
-    return trashes.map(
-      init: (_) => const SizedBox(),
-      data: (value) {
-        if (value.noteModels.isEmpty) {
-          return const Center(
-            child: Text('Trash is empty'),
-          );
-        }
-        return _TrashListRaw(noteModels: value.noteModels);
-      },
-    );
+
+    if (trashes == null) {
+      return const SizedBox();
+    }
+    if (trashes.isEmpty) {
+      return const Center(
+        child: Text('Trash is empty'),
+      );
+    }
+    return _TrashListRaw(noteModels: trashes.map((e) => e.noteModel).toList());
   }
 }
 

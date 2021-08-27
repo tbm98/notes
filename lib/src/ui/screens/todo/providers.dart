@@ -3,52 +3,30 @@ import 'package:notes/src/config/enums.dart';
 import 'package:notes/src/ui/screens/home/note_state.dart';
 import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
 
-final notTrashProvider = Provider.autoDispose<NoteState>((ref) {
+final notTrashProvider = Provider.autoDispose<List<NoteState>?>((ref) {
   final allNote = ref.watch(allNoteProvider);
 
-  return allNote.map(data: (value) {
-    return NoteState.data(
-        noteModels: value.noteModels
-            .where((element) => element.movedToTrash == false)
-            .toList());
-  }, init: (value) {
-    return value;
-  });
+  return allNote
+      ?.where((element) => element.noteModel.movedToTrash == false)
+      .toList();
 });
 
-final todoProvider = Provider.autoDispose<NoteState>((ref) {
+final todoProvider = Provider.autoDispose<List<NoteState>?>((ref) {
   final allNote = ref.watch(notTrashProvider);
-
-  return allNote.map(data: (value) {
-    return NoteState.data(
-        noteModels: value.noteModels
-            .where((element) => element.type == NoteType.todo)
-            .toList());
-  }, init: (value) {
-    return value;
-  });
+  return allNote
+      ?.where((element) => element.noteModel.type == NoteType.todo)
+      .toList();
 });
 
-final unfinishedTodoProvider = Provider.autoDispose<NoteState>((ref) {
+final unfinishedTodoProvider = Provider.autoDispose<List<NoteState>?>((ref) {
   final todos = ref.watch(todoProvider);
-  return todos.map(data: (value) {
-    return NoteState.data(
-        noteModels: value.noteModels
-            .where((element) => element.finished == false)
-            .toList());
-  }, init: (value) {
-    return value;
-  });
+
+  return todos
+      ?.where((element) => element.noteModel.finished == false)
+      .toList();
 });
 
-final finishedTodoProvider = Provider.autoDispose<NoteState>((ref) {
+final finishedTodoProvider = Provider.autoDispose<List<NoteState>?>((ref) {
   final todos = ref.watch(todoProvider);
-  return todos.map(data: (value) {
-    return NoteState.data(
-        noteModels: value.noteModels
-            .where((element) => element.finished == true)
-            .toList());
-  }, init: (value) {
-    return value;
-  });
+  return todos?.where((element) => element.noteModel.finished == true).toList();
 });

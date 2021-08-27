@@ -13,29 +13,18 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 NoteState _$NoteStateFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType'] as String) {
-    case 'data':
-      return NoteStateData.fromJson(json);
-    case 'init':
-      return NoteStateInit.fromJson(json);
-
-    default:
-      throw FallThroughError();
-  }
+  return _NoteState.fromJson(json);
 }
 
 /// @nodoc
 class _$NoteStateTearOff {
   const _$NoteStateTearOff();
 
-  NoteStateData data({required List<NoteModel> noteModels}) {
-    return NoteStateData(
-      noteModels: noteModels,
+  _NoteState call({required NoteModel noteModel, bool selected = false}) {
+    return _NoteState(
+      noteModel: noteModel,
+      selected: selected,
     );
-  }
-
-  NoteStateInit init() {
-    return const NoteStateInit();
   }
 
   NoteState fromJson(Map<String, Object> json) {
@@ -48,39 +37,22 @@ const $NoteState = _$NoteStateTearOff();
 
 /// @nodoc
 mixin _$NoteState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(List<NoteModel> noteModels) data,
-    required TResult Function() init,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<NoteModel> noteModels)? data,
-    TResult Function()? init,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(NoteStateData value) data,
-    required TResult Function(NoteStateInit value) init,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(NoteStateData value)? data,
-    TResult Function(NoteStateInit value)? init,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  NoteModel get noteModel => throw _privateConstructorUsedError;
+  bool get selected => throw _privateConstructorUsedError;
+
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $NoteStateCopyWith<NoteState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $NoteStateCopyWith<$Res> {
   factory $NoteStateCopyWith(NoteState value, $Res Function(NoteState) then) =
       _$NoteStateCopyWithImpl<$Res>;
+  $Res call({NoteModel noteModel, bool selected});
+
+  $NoteModelCopyWith<$Res> get noteModel;
 }
 
 /// @nodoc
@@ -90,35 +62,67 @@ class _$NoteStateCopyWithImpl<$Res> implements $NoteStateCopyWith<$Res> {
   final NoteState _value;
   // ignore: unused_field
   final $Res Function(NoteState) _then;
-}
-
-/// @nodoc
-abstract class $NoteStateDataCopyWith<$Res> {
-  factory $NoteStateDataCopyWith(
-          NoteStateData value, $Res Function(NoteStateData) then) =
-      _$NoteStateDataCopyWithImpl<$Res>;
-  $Res call({List<NoteModel> noteModels});
-}
-
-/// @nodoc
-class _$NoteStateDataCopyWithImpl<$Res> extends _$NoteStateCopyWithImpl<$Res>
-    implements $NoteStateDataCopyWith<$Res> {
-  _$NoteStateDataCopyWithImpl(
-      NoteStateData _value, $Res Function(NoteStateData) _then)
-      : super(_value, (v) => _then(v as NoteStateData));
-
-  @override
-  NoteStateData get _value => super._value as NoteStateData;
 
   @override
   $Res call({
-    Object? noteModels = freezed,
+    Object? noteModel = freezed,
+    Object? selected = freezed,
   }) {
-    return _then(NoteStateData(
-      noteModels: noteModels == freezed
-          ? _value.noteModels
-          : noteModels // ignore: cast_nullable_to_non_nullable
-              as List<NoteModel>,
+    return _then(_value.copyWith(
+      noteModel: noteModel == freezed
+          ? _value.noteModel
+          : noteModel // ignore: cast_nullable_to_non_nullable
+              as NoteModel,
+      selected: selected == freezed
+          ? _value.selected
+          : selected // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  @override
+  $NoteModelCopyWith<$Res> get noteModel {
+    return $NoteModelCopyWith<$Res>(_value.noteModel, (value) {
+      return _then(_value.copyWith(noteModel: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$NoteStateCopyWith<$Res> implements $NoteStateCopyWith<$Res> {
+  factory _$NoteStateCopyWith(
+          _NoteState value, $Res Function(_NoteState) then) =
+      __$NoteStateCopyWithImpl<$Res>;
+  @override
+  $Res call({NoteModel noteModel, bool selected});
+
+  @override
+  $NoteModelCopyWith<$Res> get noteModel;
+}
+
+/// @nodoc
+class __$NoteStateCopyWithImpl<$Res> extends _$NoteStateCopyWithImpl<$Res>
+    implements _$NoteStateCopyWith<$Res> {
+  __$NoteStateCopyWithImpl(_NoteState _value, $Res Function(_NoteState) _then)
+      : super(_value, (v) => _then(v as _NoteState));
+
+  @override
+  _NoteState get _value => super._value as _NoteState;
+
+  @override
+  $Res call({
+    Object? noteModel = freezed,
+    Object? selected = freezed,
+  }) {
+    return _then(_NoteState(
+      noteModel: noteModel == freezed
+          ? _value.noteModel
+          : noteModel // ignore: cast_nullable_to_non_nullable
+              as NoteModel,
+      selected: selected == freezed
+          ? _value.selected
+          : selected // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -126,207 +130,74 @@ class _$NoteStateDataCopyWithImpl<$Res> extends _$NoteStateCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class _$NoteStateData with DiagnosticableTreeMixin implements NoteStateData {
-  const _$NoteStateData({required this.noteModels});
+class _$_NoteState with DiagnosticableTreeMixin implements _NoteState {
+  const _$_NoteState({required this.noteModel, this.selected = false});
 
-  factory _$NoteStateData.fromJson(Map<String, dynamic> json) =>
-      _$_$NoteStateDataFromJson(json);
+  factory _$_NoteState.fromJson(Map<String, dynamic> json) =>
+      _$_$_NoteStateFromJson(json);
 
   @override
-  final List<NoteModel> noteModels;
+  final NoteModel noteModel;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool selected;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NoteState.data(noteModels: $noteModels)';
+    return 'NoteState(noteModel: $noteModel, selected: $selected)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'NoteState.data'))
-      ..add(DiagnosticsProperty('noteModels', noteModels));
+      ..add(DiagnosticsProperty('type', 'NoteState'))
+      ..add(DiagnosticsProperty('noteModel', noteModel))
+      ..add(DiagnosticsProperty('selected', selected));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is NoteStateData &&
-            (identical(other.noteModels, noteModels) ||
+        (other is _NoteState &&
+            (identical(other.noteModel, noteModel) ||
                 const DeepCollectionEquality()
-                    .equals(other.noteModels, noteModels)));
+                    .equals(other.noteModel, noteModel)) &&
+            (identical(other.selected, selected) ||
+                const DeepCollectionEquality()
+                    .equals(other.selected, selected)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(noteModels);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(noteModel) ^
+      const DeepCollectionEquality().hash(selected);
 
   @JsonKey(ignore: true)
   @override
-  $NoteStateDataCopyWith<NoteStateData> get copyWith =>
-      _$NoteStateDataCopyWithImpl<NoteStateData>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(List<NoteModel> noteModels) data,
-    required TResult Function() init,
-  }) {
-    return data(noteModels);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<NoteModel> noteModels)? data,
-    TResult Function()? init,
-    required TResult orElse(),
-  }) {
-    if (data != null) {
-      return data(noteModels);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(NoteStateData value) data,
-    required TResult Function(NoteStateInit value) init,
-  }) {
-    return data(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(NoteStateData value)? data,
-    TResult Function(NoteStateInit value)? init,
-    required TResult orElse(),
-  }) {
-    if (data != null) {
-      return data(this);
-    }
-    return orElse();
-  }
+  _$NoteStateCopyWith<_NoteState> get copyWith =>
+      __$NoteStateCopyWithImpl<_NoteState>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$NoteStateDataToJson(this)..['runtimeType'] = 'data';
+    return _$_$_NoteStateToJson(this);
   }
 }
 
-abstract class NoteStateData implements NoteState {
-  const factory NoteStateData({required List<NoteModel> noteModels}) =
-      _$NoteStateData;
+abstract class _NoteState implements NoteState {
+  const factory _NoteState({required NoteModel noteModel, bool selected}) =
+      _$_NoteState;
 
-  factory NoteStateData.fromJson(Map<String, dynamic> json) =
-      _$NoteStateData.fromJson;
+  factory _NoteState.fromJson(Map<String, dynamic> json) =
+      _$_NoteState.fromJson;
 
-  List<NoteModel> get noteModels => throw _privateConstructorUsedError;
+  @override
+  NoteModel get noteModel => throw _privateConstructorUsedError;
+  @override
+  bool get selected => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
-  $NoteStateDataCopyWith<NoteStateData> get copyWith =>
+  _$NoteStateCopyWith<_NoteState> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $NoteStateInitCopyWith<$Res> {
-  factory $NoteStateInitCopyWith(
-          NoteStateInit value, $Res Function(NoteStateInit) then) =
-      _$NoteStateInitCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$NoteStateInitCopyWithImpl<$Res> extends _$NoteStateCopyWithImpl<$Res>
-    implements $NoteStateInitCopyWith<$Res> {
-  _$NoteStateInitCopyWithImpl(
-      NoteStateInit _value, $Res Function(NoteStateInit) _then)
-      : super(_value, (v) => _then(v as NoteStateInit));
-
-  @override
-  NoteStateInit get _value => super._value as NoteStateInit;
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$NoteStateInit with DiagnosticableTreeMixin implements NoteStateInit {
-  const _$NoteStateInit();
-
-  factory _$NoteStateInit.fromJson(Map<String, dynamic> json) =>
-      _$_$NoteStateInitFromJson(json);
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NoteState.init()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'NoteState.init'));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is NoteStateInit);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(List<NoteModel> noteModels) data,
-    required TResult Function() init,
-  }) {
-    return init();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<NoteModel> noteModels)? data,
-    TResult Function()? init,
-    required TResult orElse(),
-  }) {
-    if (init != null) {
-      return init();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(NoteStateData value) data,
-    required TResult Function(NoteStateInit value) init,
-  }) {
-    return init(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(NoteStateData value)? data,
-    TResult Function(NoteStateInit value)? init,
-    required TResult orElse(),
-  }) {
-    if (init != null) {
-      return init(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$_$NoteStateInitToJson(this)..['runtimeType'] = 'init';
-  }
-}
-
-abstract class NoteStateInit implements NoteState {
-  const factory NoteStateInit() = _$NoteStateInit;
-
-  factory NoteStateInit.fromJson(Map<String, dynamic> json) =
-      _$NoteStateInit.fromJson;
 }

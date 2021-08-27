@@ -13,26 +13,23 @@ class TodoPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final todos = ref.watch(todoProvider);
-    return todos.map(
-      data: (value) {
-        if (value.noteModels.isEmpty) {
-          return const Center(
-            child: Text('Todo empty!'),
-          );
-        }
-        return SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              _SectionTodoListByStatus(finished: false),
-              _SectionTodoListByStatus(finished: true)
-            ],
-          ),
-        );
-      },
-      init: (_) {
-        return const SizedBox();
-      },
+    if (todos == null) {
+      return const SizedBox();
+    }
+    if (todos.isEmpty) {
+      return const Center(
+        child: Text('Todo empty!'),
+      );
+    }
+
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          _SectionTodoListByStatus(finished: false),
+          _SectionTodoListByStatus(finished: true)
+        ],
+      ),
     );
   }
 }
@@ -49,15 +46,11 @@ class _SectionTodoListByStatus extends ConsumerWidget {
     final todos = finished
         ? ref.watch(finishedTodoProvider)
         : ref.watch(unfinishedTodoProvider);
-    return todos.map(
-      init: (_) => const SizedBox(),
-      data: (value) {
-        if (value.noteModels.isEmpty) {
-          return const SizedBox();
-        }
-        return _TodoListRaw(noteModels: value.noteModels);
-      },
-    );
+    if (todos == null || todos.isEmpty) {
+      return const SizedBox();
+    }
+
+    return _TodoListRaw(noteModels: todos.map((e) => e.noteModel).toList());
   }
 }
 
@@ -83,13 +76,12 @@ class _TodoListRaw extends ConsumerWidget {
         return Padding(
           padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
           child: ListTile(
-            onTap: (){
+            onTap: () {
               // TODO: handle tap todo
               print('tap');
             },
-            onLongPress: (){
+            onLongPress: () {
               print('long tap');
-              ref.read(allNoteProvider.notifier).
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),

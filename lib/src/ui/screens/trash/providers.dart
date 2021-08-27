@@ -4,15 +4,13 @@ import 'package:notes/src/di/get_it.dart';
 import 'package:notes/src/ui/screens/home/note_state.dart';
 import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
 
-class TrashNotifier extends StateNotifier<NoteState> {
-  TrashNotifier(NoteState noteState) : super(noteState);
+class TrashNotifier extends StateNotifier<List<NoteState>?> {
+  TrashNotifier(List<NoteState>? noteStates) : super(noteStates);
 
   Future<bool> emptyTrash() async {
     bool anyFail = false;
-    final trashNote =
-        state.map(data: (value) => value.noteModels, init: (_) => []);
-    trashNote.forEach((element) async {
-      final result = await getIt<Storage>().deleteNote(element);
+    state?.forEach((element) async {
+      final result = await getIt<Storage>().deleteNote(element.noteModel);
       if (result == false) {
         anyFail = true;
       }
@@ -22,14 +20,9 @@ class TrashNotifier extends StateNotifier<NoteState> {
 }
 
 final trashProvider =
-    StateNotifierProvider.autoDispose<TrashNotifier, NoteState>((ref) {
-  final noteState = ref.watch(allNoteProvider).map(data: (value) {
-    return NoteState.data(
-        noteModels: value.noteModels
-            .where((element) => element.movedToTrash == true)
-            .toList());
-  }, init: (value) {
-    return value;
-  });
-  return TrashNotifier(noteState);
+    StateNotifierProvider.autoDispose<TrashNotifier, List<NoteState>?>((ref) {
+  final noteState = ref.watch(allNoteProvider);
+  return TrashNotifier(noteState
+      ?.where((element) => element.noteModel.movedToTrash == true)
+      .toList());
 });

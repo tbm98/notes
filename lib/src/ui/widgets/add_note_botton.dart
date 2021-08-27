@@ -34,7 +34,7 @@ class AddNoteButton extends ConsumerWidget {
           child: const Icon(Icons.edit),
         );
       },
-      onClosed: (returnValue) async{
+      onClosed: (returnValue) async {
         if (returnValue == null) {
           return;
         }

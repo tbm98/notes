@@ -7,24 +7,24 @@ import 'package:notes/src/di/get_it.dart';
 import 'package:notes/src/models/note_model.dart';
 import 'package:notes/src/ui/screens/home/note_state.dart';
 
-class AllNoteNotifier extends StateNotifier<NoteState> {
+class AllNoteNotifier extends StateNotifier<List<NoteState>?> {
   StreamSubscription? _allNoteStreamSubscription;
 
-  AllNoteNotifier() : super(const NoteState.init()) {
+  AllNoteNotifier() : super(null) {
     init();
   }
 
   void init() {
     _allNoteStreamSubscription =
         getIt<Storage>().allNoteStream().listen((event) {
-      state = NoteState.data(noteModels: event);
+      state = event.map((e) => NoteState(noteModel: e)).toList();
     });
   }
 
   /// for cancel subscription when dispose if need
   void onDispose() {
     _allNoteStreamSubscription?.cancel();
-    state = const NoteState.init();
+    state = null;
   }
 
   Future<bool> updateNote(NoteModel noteModel) async {
@@ -33,7 +33,7 @@ class AllNoteNotifier extends StateNotifier<NoteState> {
 }
 
 final allNoteProvider =
-    StateNotifierProvider.autoDispose<AllNoteNotifier, NoteState>((ref) {
+    StateNotifierProvider.autoDispose<AllNoteNotifier, List<NoteState>?>((ref) {
   final allNoteNotifier = AllNoteNotifier();
 
   ref.onDispose(() {

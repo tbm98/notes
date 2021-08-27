@@ -11,23 +11,23 @@ class MemoriesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final memories = ref.watch(memoriesNoteProvider);
-    return memories.map(data: (value) {
-      if (value.noteModels.isEmpty) {
-        return const Center(
-          child: Text('Memory empty!'),
-        );
-      }
-      return ListView.builder(
-        itemCount: value.noteModels.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(value.noteModels[index].title),
-            subtitle: Text(value.noteModels[index].note),
-          );
-        },
-      );
-    }, init: (_) {
+    if (memories == null) {
       return const SizedBox();
-    });
+    }
+    if (memories.isEmpty) {
+      return const Center(
+        child: Text('Memory empty!'),
+      );
+    }
+    final noteModels = memories.map((e) => e.noteModel).toList();
+    return ListView.builder(
+      itemCount: noteModels.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(noteModels[index].title),
+          subtitle: Text(noteModels[index].note),
+        );
+      },
+    );
   }
 }

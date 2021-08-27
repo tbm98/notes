@@ -1,4 +1,1 @@
-enum NoteType {
-  todo,
-  memory
-}
+enum NoteType { todo, memory }

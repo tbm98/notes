@@ -83,18 +83,10 @@ class _DataInfo extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todos = ref
-        .watch(todoProvider)
-        .map(data: (value) => value.noteModels.length, init: (_) => 0);
-    final finishedTodos = ref
-        .watch(finishedTodoProvider)
-        .map(data: (value) => value.noteModels.length, init: (_) => 0);
-    final unfinishedTodos = ref
-        .watch(unfinishedTodoProvider)
-        .map(data: (value) => value.noteModels.length, init: (_) => 0);
-    final memories = ref
-        .watch(memoriesNoteProvider)
-        .map(data: (value) => value.noteModels.length, init: (_) => 0);
+    final todos = ref.watch(todoProvider)?.length ?? 0;
+    final finishedTodos = ref.watch(finishedTodoProvider)?.length ?? 0;
+    final unfinishedTodos = ref.watch(unfinishedTodoProvider)?.length ?? 0;
+    final memories = ref.watch(memoriesNoteProvider)?.length ?? 0;
     return Container(
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.only(left: avatarSize + 8),

@@ -9,11 +9,10 @@ part 'note_state.g.dart';
 @freezed
 class NoteState with _$NoteState {
   @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-  const factory NoteState.data({
-    required List<NoteModel> noteModels,
-  }) = NoteStateData;
-
-  const factory NoteState.init() = NoteStateInit;
+  const factory NoteState({
+    required NoteModel noteModel,
+    @Default(false) bool selected,
+  }) = _NoteState;
 
   factory NoteState.fromJson(Map<String, dynamic> json) =>
       _$NoteStateFromJson(json);
