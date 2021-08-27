@@ -55,13 +55,7 @@ class _SectionTodoListByStatus extends ConsumerWidget {
         if (value.noteModels.isEmpty) {
           return const SizedBox();
         }
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(finished ? 'finished' : 'unfinished'),
-            _TodoListRaw(noteModels: value.noteModels),
-          ],
-        );
+        return _TodoListRaw(noteModels: value.noteModels);
       },
     );
   }
@@ -86,47 +80,62 @@ class _TodoListRaw extends ConsumerWidget {
         final textStyle = finished
             ? const TextStyle(decoration: TextDecoration.lineThrough)
             : const TextStyle();
-        return ListTile(
-          key: ValueKey<String>('todo-$index-finished=$finished'),
-          tileColor: finished ? Colors.grey : null,
-          title: Text(
-            noteModels[index].title,
-            style: textStyle,
-          ),
-          subtitle: Text(
-            noteModels[index].note,
-            style: textStyle,
-          ),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Checkbox(
-                onChanged: (bool? value) {
-                  ref
-                      .read(allNoteProvider.notifier)
-                      .updateNote(noteModels[index].copyWith(finished: value!));
-                },
-                value: noteModels[index].finished,
-              ),
-              IconButton(
-                  onPressed: () async {
-                    final scaffoldMessager = ScaffoldMessenger.of(context);
-                    final allNoteNotifier = ref.read(allNoteProvider.notifier);
-                    await allNoteNotifier.updateNote(
-                        noteModels[index].copyWith(movedToTrash: true));
-                    scaffoldMessager.showSnackBar(SnackBar(
-                      content: Text('moved 1 note to trash'),
-                      action: SnackBarAction(
-                        label: 'Undo',
-                        onPressed: () {
-                          allNoteNotifier.updateNote(
-                              noteModels[index].copyWith(movedToTrash: false));
-                        },
-                      ),
-                    ));
+        return Padding(
+          padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
+          child: ListTile(
+            onTap: (){
+              // TODO: handle tap todo
+              print('tap');
+            },
+            onLongPress: (){
+              print('long tap');
+              ref.read(allNoteProvider.notifier).
+            },
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+              side: BorderSide(color: Colors.black),
+            ),
+            key: ValueKey<String>('todo-$index-finished=$finished'),
+            tileColor: finished ? Colors.lightGreen : null,
+            title: Text(
+              noteModels[index].title,
+              style: textStyle,
+            ),
+            subtitle: Text(
+              noteModels[index].note,
+              style: textStyle,
+            ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Checkbox(
+                  onChanged: (bool? value) {
+                    ref.read(allNoteProvider.notifier).updateNote(
+                        noteModels[index].copyWith(finished: value!));
                   },
-                  icon: const Icon(CupertinoIcons.trash))
-            ],
+                  value: noteModels[index].finished,
+                ),
+                IconButton(
+                    onPressed: () async {
+                      final scaffoldMessager = ScaffoldMessenger.of(context);
+                      final allNoteNotifier =
+                          ref.read(allNoteProvider.notifier);
+                      await allNoteNotifier.updateNote(
+                          noteModels[index].copyWith(movedToTrash: true));
+                      scaffoldMessager.showSnackBar(SnackBar(
+                        content: Text('moved 1 note to trash'),
+                        action: SnackBarAction(
+                          label: 'Undo',
+                          onPressed: () {
+                            allNoteNotifier.updateNote(noteModels[index]
+                                .copyWith(movedToTrash: false));
+                          },
+                        ),
+                      ));
+                    },
+                    icon: const Icon(CupertinoIcons.trash))
+              ],
+            ),
           ),
         );
       },
