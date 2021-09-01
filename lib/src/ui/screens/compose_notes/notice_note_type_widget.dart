@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notes/src/config/enums.dart';
 import 'package:notes/src/config/naming.dart';
-import 'package:notes/src/ui/screens/add_note/providers.dart';
+import 'package:notes/src/ui/screens/compose_notes/providers.dart';
 
 class NoticeNoteTypeWidget extends ConsumerWidget {
   const NoticeNoteTypeWidget({
@@ -12,7 +12,7 @@ class NoticeNoteTypeWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final noteType =
-        ref.watch(addNoteProvider.select((value) => value.noteModel.type));
+        ref.watch(composeNoteProvider.select((value) => value.noteModel.type));
     return Container(
       alignment: Alignment.centerRight,
       child: ElevatedButton.icon(
@@ -20,7 +20,7 @@ class NoticeNoteTypeWidget extends ConsumerWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8))),
           onPressed: () {
-            ref.read(addNoteProvider.notifier).toggleType();
+            ref.read(composeNoteProvider.notifier).toggleType();
           },
           icon: Icon(noteType == NoteType.todo
               ? Icons.check_box_outlined

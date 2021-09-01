@@ -97,7 +97,6 @@ class _DataInfo extends ConsumerWidget {
           Text(
               'Todo count: $todos ($unfinishedTodos unfinished, $finishedTodos done)'),
           Text('Memory count: $memories'),
-          Text('join date'), // TODO: implement join date
         ],
       ),
     );

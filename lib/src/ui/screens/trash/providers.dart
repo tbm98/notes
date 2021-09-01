@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notes/src/core/storage/storage.dart';
 import 'package:notes/src/di/get_it.dart';

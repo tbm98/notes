@@ -1,7 +1,12 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notes/src/config/global_constant.dart';
 import 'package:notes/src/models/note_model.dart';
+import 'package:notes/src/ui/screens/compose_notes/compose_note_page.dart';
+import 'package:notes/src/ui/screens/compose_notes/compose_note_state.dart';
+import 'package:notes/src/ui/screens/compose_notes/providers.dart';
 import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
 import 'package:notes/src/ui/screens/todo/providers.dart';
 
@@ -69,68 +74,92 @@ class _TodoListRaw extends ConsumerWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: noteModels.length,
       itemBuilder: (context, index) {
-        final finished = noteModels[index].finished;
-        final textStyle = finished
-            ? const TextStyle(decoration: TextDecoration.lineThrough)
-            : const TextStyle();
-        return Padding(
-          padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
-          child: ListTile(
-            onTap: () {
-              // TODO: handle tap todo
-              print('tap');
-            },
-            onLongPress: () {
-              print('long tap');
-            },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-              side: BorderSide(color: Colors.black),
-            ),
-            key: ValueKey<String>('todo-$index-finished=$finished'),
-            tileColor: finished ? Colors.lightGreen : null,
-            title: Text(
-              noteModels[index].title,
-              style: textStyle,
-            ),
-            subtitle: Text(
-              noteModels[index].note,
-              style: textStyle,
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Checkbox(
-                  onChanged: (bool? value) {
-                    ref.read(allNoteProvider.notifier).updateNote(
-                        noteModels[index].copyWith(finished: value!));
+        return _ItemListRaw(noteModel: noteModels[index]);
+      },
+    );
+  }
+}
+
+class _ItemListRaw extends ConsumerWidget {
+  const _ItemListRaw({
+    Key? key,
+    required this.noteModel,
+  }) : super(key: key);
+  final NoteModel noteModel;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final finished = noteModel.finished;
+    final textStyle = finished
+        ? const TextStyle(decoration: TextDecoration.lineThrough)
+        : const TextStyle();
+    return OpenContainer<NoteModel>(
+      openBuilder: (
+        BuildContext context,
+        void Function({NoteModel? returnValue}) action,
+      ) {
+        return ProviderScope(overrides: [
+          composeNoteProvider.overrideWithValue(
+            ComposeNoteStateNotifier(
+                oldState: ComposeNoteState(noteModel: noteModel)),
+          )
+        ], child: AddNotePage(returnValueCallback: action));
+      },
+      closedElevation: 0.0,
+      closedShape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(0)),
+      ),
+      closedBuilder: (
+        BuildContext context,
+        void Function() action,
+      ) {
+        return ListTile(
+          onTap: action,
+          onLongPress: () {
+            // TODO;
+          },
+          tileColor: finished ? Colors.green : null,
+          title: Text(noteModel.title, style: textStyle),
+          subtitle: Text(noteModel.note, style: textStyle),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Checkbox(
+                onChanged: (bool? value) {
+                  ref
+                      .read(allNoteProvider.notifier)
+                      .updateNote(noteModel.copyWith(finished: value!));
+                },
+                value: noteModel.finished,
+              ),
+              IconButton(
+                  onPressed: () async {
+                    final scaffoldMessager = ScaffoldMessenger.of(context);
+                    final allNoteNotifier = ref.read(allNoteProvider.notifier);
+                    await allNoteNotifier
+                        .updateNote(noteModel.copyWith(movedToTrash: true));
+                    scaffoldMessager.showSnackBar(SnackBar(
+                      content: const Text('moved 1 note to trash'),
+                      action: SnackBarAction(
+                        label: 'Undo',
+                        onPressed: () {
+                          allNoteNotifier.updateNote(
+                              noteModel.copyWith(movedToTrash: false));
+                        },
+                      ),
+                    ));
                   },
-                  value: noteModels[index].finished,
-                ),
-                IconButton(
-                    onPressed: () async {
-                      final scaffoldMessager = ScaffoldMessenger.of(context);
-                      final allNoteNotifier =
-                          ref.read(allNoteProvider.notifier);
-                      await allNoteNotifier.updateNote(
-                          noteModels[index].copyWith(movedToTrash: true));
-                      scaffoldMessager.showSnackBar(SnackBar(
-                        content: Text('moved 1 note to trash'),
-                        action: SnackBarAction(
-                          label: 'Undo',
-                          onPressed: () {
-                            allNoteNotifier.updateNote(noteModels[index]
-                                .copyWith(movedToTrash: false));
-                          },
-                        ),
-                      ));
-                    },
-                    icon: const Icon(CupertinoIcons.trash))
-              ],
-            ),
+                  icon: const Icon(CupertinoIcons.trash))
+            ],
           ),
         );
       },
+      onClosed: (returnValue) async {
+        if (returnValue == null) {
+          return;
+        }
+      },
+      transitionDuration: const Duration(milliseconds: 500),
     );
   }
 }

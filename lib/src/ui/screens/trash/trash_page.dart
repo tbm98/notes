@@ -75,8 +75,7 @@ class _TrashListRaw extends ConsumerWidget {
             ? const TextStyle(decoration: TextDecoration.lineThrough)
             : const TextStyle();
         return ListTile(
-          key: ValueKey<String>('trash-$index'),
-          tileColor: finished ? Colors.grey : null,
+          tileColor: finished ? Colors.green : null,
           title: Text(
             noteModels[index].title,
             style: textStyle,
@@ -93,9 +92,22 @@ class _TrashListRaw extends ConsumerWidget {
                 value: noteModels[index].finished,
               ),
               IconButton(
-                  onPressed: () {
-                    ref.read(allNoteProvider.notifier).updateNote(
+                  onPressed: () async {
+                    final scaffoldMessager = ScaffoldMessenger.of(context);
+                    final allNoteNotifier = ref.read(allNoteProvider.notifier);
+
+                    await allNoteNotifier.updateNote(
                         noteModels[index].copyWith(movedToTrash: false));
+                    scaffoldMessager.showSnackBar(SnackBar(
+                      content: const Text('just restored a note'),
+                      action: SnackBarAction(
+                        label: 'Undo',
+                        onPressed: () {
+                          allNoteNotifier.updateNote(
+                              noteModels[index].copyWith(movedToTrash: true));
+                        },
+                      ),
+                    ));
                   },
                   icon: Icon(
                     Icons.restore,

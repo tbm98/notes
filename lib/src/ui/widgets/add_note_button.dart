@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notes/src/config/global_constant.dart';
 import 'package:notes/src/models/note_model.dart';
-import 'package:notes/src/ui/screens/add_note/add_note_page.dart';
-import 'package:notes/src/ui/screens/add_note/providers.dart';
+import 'package:notes/src/ui/screens/compose_notes/compose_note_page.dart';
+import 'package:notes/src/ui/screens/compose_notes/providers.dart';
 
 class AddNoteButton extends ConsumerWidget {
   const AddNoteButton({
@@ -38,7 +38,7 @@ class AddNoteButton extends ConsumerWidget {
         if (returnValue == null) {
           return;
         }
-        await ref.read(addNoteProvider.notifier).saveNote(returnValue);
+        await ref.read(composeNoteProvider.notifier).saveNote(returnValue);
       },
       transitionDuration: const Duration(milliseconds: 500),
     );

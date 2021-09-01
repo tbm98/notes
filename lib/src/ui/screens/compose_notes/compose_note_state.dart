@@ -4,20 +4,20 @@ import 'package:notes/src/config/enums.dart';
 import 'package:notes/src/config/global_constant.dart';
 import 'package:notes/src/models/note_model.dart';
 
-part 'add_note_state.freezed.dart';
+part 'compose_note_state.freezed.dart';
 
-part 'add_note_state.g.dart';
+part 'compose_note_state.g.dart';
 
 @freezed
-class AddNoteState with _$AddNoteState {
+class ComposeNoteState with _$ComposeNoteState {
   @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-  const factory AddNoteState({
+  const factory ComposeNoteState({
     required NoteModel noteModel,
-  }) = _AddNoteState;
+  }) = _ComposeNoteState;
 
-  factory AddNoteState.init(NoteType type) => AddNoteState(
+  factory ComposeNoteState.init(NoteType type) => ComposeNoteState(
       noteModel: NoteModel(id: uuid.v4(), title: '', note: '', type: type));
 
-  factory AddNoteState.fromJson(Map<String, dynamic> json) =>
-      _$AddNoteStateFromJson(json);
+  factory ComposeNoteState.fromJson(Map<String, dynamic> json) =>
+      _$ComposeNoteStateFromJson(json);
 }

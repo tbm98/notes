@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/src/ui/screens/trash/trash_page.dart';
-import 'package:notes/src/ui/widgets/add_note_botton.dart';
+import 'package:notes/src/ui/widgets/add_note_button.dart';
 import 'package:notes/src/ui/widgets/avatar_widget.dart';
 import 'package:notes/src/ui/widgets/bottom_navi_bar_widget.dart';
 import 'package:notes/src/ui/widgets/my_page_view.dart';

@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:notes/src/ui/screens/add_note/providers.dart';
-import 'package:notes/src/ui/screens/add_note/tool_bar/providers.dart';
+import 'package:notes/src/ui/screens/compose_notes/tool_bar/providers.dart';
 import 'package:notes/src/ui/widgets/my_animated_size.dart';
 import 'package:notes/src/utils/time.dart';
 
+import '../providers.dart';
 import 'item_toolbar_widget.dart';
 
 class AddNoteToolBarWidget extends ConsumerWidget {
@@ -91,14 +91,14 @@ class _BuildItems extends ConsumerWidget {
           child: const Icon(Icons.add_alert_outlined),
           onTap: () async {
             final date = await showDateTimePicker(context);
-            ref.read(addNoteProvider.notifier).alarmPicked(date);
+            ref.read(composeNoteProvider.notifier).alarmPicked(date);
           },
         ),
         ItemToolBar(
           child: const Icon(Icons.today_outlined),
           onTap: () async {
             final date = await showDateTimePicker(context);
-            ref.read(addNoteProvider.notifier).datePicked(date);
+            ref.read(composeNoteProvider.notifier).datePicked(date);
           },
         ),
       ],

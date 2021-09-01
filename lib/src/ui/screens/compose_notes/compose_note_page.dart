@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notes/src/models/note_model.dart';
-import 'package:notes/src/ui/screens/add_note/notice_note_info_widget.dart';
-import 'package:notes/src/ui/screens/add_note/providers.dart';
-
+import 'package:notes/src/ui/screens/compose_notes/providers.dart';
+import 'compose_note_state.dart';
+import 'notice_note_info_widget.dart';
 import 'tool_bar/add_note_tool_bar_widget.dart';
 
 class AddNotePage extends ConsumerStatefulWidget {
@@ -37,7 +37,7 @@ class _AddNotePageState extends ConsumerState<AddNotePage> {
   }
 
   void _handleReturn() {
-    final noteModel = ref.read(addNoteProvider.notifier).prepareForAddNote();
+    final noteModel = ref.read(composeNoteProvider.notifier).composeResult();
     widget.returnValueCallback(returnValue: noteModel);
   }
 
@@ -70,7 +70,7 @@ class _AddNotePageState extends ConsumerState<AddNotePage> {
                       autofocus: true,
                       onSubmitted: (_) => _contentFocusNode.requestFocus(),
                       onChanged:
-                          ref.read(addNoteProvider.notifier).changedTitle,
+                          ref.read(composeNoteProvider.notifier).changedTitle,
                     ),
                     const NoticeNoteInfoWidget(),
                     TextField(
@@ -81,7 +81,8 @@ class _AddNotePageState extends ConsumerState<AddNotePage> {
                       maxLines: null,
                       textInputAction: TextInputAction.newline,
                       focusNode: _contentFocusNode,
-                      onChanged: ref.read(addNoteProvider.notifier).changedNote,
+                      onChanged:
+                          ref.read(composeNoteProvider.notifier).changedNote,
                     ),
                   ],
                 ),

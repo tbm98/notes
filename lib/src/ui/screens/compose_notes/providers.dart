@@ -3,13 +3,15 @@ import 'package:notes/src/config/enums.dart';
 import 'package:notes/src/core/storage/storage.dart';
 import 'package:notes/src/di/get_it.dart';
 import 'package:notes/src/models/note_model.dart';
-import 'package:notes/src/ui/screens/add_note/add_note_state.dart';
-import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
 import 'package:notes/src/ui/screens/home/providers/tab_providers.dart';
 
-class AddNoteStateNotifier extends StateNotifier<AddNoteState> {
-  AddNoteStateNotifier({required NoteType type, this.ref})
-      : super(AddNoteState.init(type));
+import 'compose_note_state.dart';
+
+class ComposeNoteStateNotifier extends StateNotifier<ComposeNoteState> {
+  ComposeNoteStateNotifier({
+    required ComposeNoteState oldState,
+    this.ref,
+  }) : super(oldState);
 
   final ProviderRefBase? ref;
 
@@ -45,7 +47,7 @@ class AddNoteStateNotifier extends StateNotifier<AddNoteState> {
   }
 
   /// return a note to save to storage, if title and note is empty => return null
-  NoteModel? prepareForAddNote() {
+  NoteModel? composeResult() {
     if (state.noteModel.title.isEmpty && state.noteModel.note.isEmpty) {
       return null;
     }
@@ -61,15 +63,17 @@ class AddNoteStateNotifier extends StateNotifier<AddNoteState> {
   }
 }
 
-final addNotePreferTypeProvider = StateProvider<NoteType>((ref) {
+final composeNotePreferTypeProvider = StateProvider<NoteType>((ref) {
   final currentTab = ref.watch(currentTabProvider).state;
 
   return currentTab == 0 ? NoteType.todo : NoteType.memory;
 });
 
-final addNoteProvider =
-    StateNotifierProvider.autoDispose<AddNoteStateNotifier, AddNoteState>(
-        (ref) {
-  final preferType = ref.watch(addNotePreferTypeProvider).state;
-  return AddNoteStateNotifier(type: preferType, ref: ref);
+final composeNoteProvider = StateNotifierProvider.autoDispose<
+    ComposeNoteStateNotifier, ComposeNoteState>((ref) {
+  final preferType = ref.watch(composeNotePreferTypeProvider).state;
+  return ComposeNoteStateNotifier(
+    oldState: ComposeNoteState.init(preferType),
+    ref: ref,
+  );
 });
