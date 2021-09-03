@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notes/src/models/note_model.dart';
 import 'package:notes/src/ui/screens/compose_notes/providers.dart';
@@ -7,8 +8,8 @@ import 'compose_note_state.dart';
 import 'notice_note_info_widget.dart';
 import 'tool_bar/add_note_tool_bar_widget.dart';
 
-class AddNotePage extends ConsumerStatefulWidget {
-  const AddNotePage({
+class ComposeNotePage extends ConsumerStatefulWidget {
+  const ComposeNotePage({
     Key? key,
     required this.returnValueCallback,
   }) : super(key: key);
@@ -19,8 +20,10 @@ class AddNotePage extends ConsumerStatefulWidget {
   ConsumerState createState() => _AddNotePageState();
 }
 
-class _AddNotePageState extends ConsumerState<AddNotePage> {
+class _AddNotePageState extends ConsumerState<ComposeNotePage> {
   late final FocusNode _contentFocusNode;
+  final _titleController = TextEditingController();
+  final _noteController = TextEditingController();
 
   @override
   void initState() {
@@ -43,6 +46,14 @@ class _AddNotePageState extends ConsumerState<AddNotePage> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: improve later
+    final composeState = ref.watch(composeNoteProvider);
+    if(_titleController.text.isEmpty){
+      _titleController.text = composeState.noteModel.title;
+    }
+    if(_noteController.text.isEmpty){
+      _noteController.text = composeState.noteModel.note;
+    }
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(onPressed: _handleReturn),
@@ -60,6 +71,7 @@ class _AddNotePageState extends ConsumerState<AddNotePage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextField(
+                      controller: _titleController,
                       decoration: const InputDecoration(
                         hintText: 'Title',
                         border: InputBorder.none,
@@ -74,6 +86,7 @@ class _AddNotePageState extends ConsumerState<AddNotePage> {
                     ),
                     const NoticeNoteInfoWidget(),
                     TextField(
+                      controller: _noteController,
                       decoration: const InputDecoration(
                         hintText: 'Note',
                         border: InputBorder.none,

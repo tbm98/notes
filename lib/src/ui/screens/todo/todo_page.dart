@@ -99,11 +99,12 @@ class _ItemListRaw extends ConsumerWidget {
         void Function({NoteModel? returnValue}) action,
       ) {
         return ProviderScope(overrides: [
-          composeNoteProvider.overrideWithValue(
-            ComposeNoteStateNotifier(
-                oldState: ComposeNoteState(noteModel: noteModel)),
-          )
-        ], child: AddNotePage(returnValueCallback: action));
+          composeNoteProvider.overrideWithProvider(StateNotifierProvider
+              .autoDispose<ComposeNoteStateNotifier, ComposeNoteState>((ref) {
+            return ComposeNoteStateNotifier(
+                oldState: ComposeNoteState(noteModel: noteModel));
+          })),
+        ], child: ComposeNotePage(returnValueCallback: action));
       },
       closedElevation: 0.0,
       closedShape: const RoundedRectangleBorder(
@@ -158,6 +159,7 @@ class _ItemListRaw extends ConsumerWidget {
         if (returnValue == null) {
           return;
         }
+        ref.read(allNoteProvider.notifier).updateNote(returnValue);
       },
       transitionDuration: const Duration(milliseconds: 500),
     );

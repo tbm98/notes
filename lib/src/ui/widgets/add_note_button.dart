@@ -18,7 +18,7 @@ class AddNoteButton extends ConsumerWidget {
         BuildContext context,
         void Function({NoteModel? returnValue}) action,
       ) {
-        return AddNotePage(returnValueCallback: action);
+        return ComposeNotePage(returnValueCallback: action);
       },
       closedElevation: 6.0,
       closedShape: const RoundedRectangleBorder(

@@ -1,6 +1,6 @@
 name: Flutter Workflow
 env:
-  FLUTTER_VERSION: "beta"
+  FLUTTER_VERSION: "dev"
 on: push
 jobs:
   test:
