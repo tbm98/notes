@@ -331,9 +331,9 @@ packages:
   flutter_riverpod:
     dependency: "direct main"
     description:
-      path: "../river_pod/packages/flutter_riverpod"
-      relative: true
-    source: path
+      name: flutter_riverpod
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.0.0-dev.7"
   flutter_test:
     dependency: "direct dev"

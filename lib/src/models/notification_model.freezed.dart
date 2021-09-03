@@ -20,8 +20,10 @@ NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) {
 class _$NotificationModelTearOff {
   const _$NotificationModelTearOff();
 
-  _NotificationModel call({required String title, required String subTitle}) {
+  _NotificationModel call(
+      {required int id, required String title, required String subTitle}) {
     return _NotificationModel(
+      id: id,
       title: title,
       subTitle: subTitle,
     );
@@ -37,6 +39,7 @@ const $NotificationModel = _$NotificationModelTearOff();
 
 /// @nodoc
 mixin _$NotificationModel {
+  int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get subTitle => throw _privateConstructorUsedError;
 
@@ -51,7 +54,7 @@ abstract class $NotificationModelCopyWith<$Res> {
   factory $NotificationModelCopyWith(
           NotificationModel value, $Res Function(NotificationModel) then) =
       _$NotificationModelCopyWithImpl<$Res>;
-  $Res call({String title, String subTitle});
+  $Res call({int id, String title, String subTitle});
 }
 
 /// @nodoc
@@ -65,10 +68,15 @@ class _$NotificationModelCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? title = freezed,
     Object? subTitle = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -88,7 +96,7 @@ abstract class _$NotificationModelCopyWith<$Res>
           _NotificationModel value, $Res Function(_NotificationModel) then) =
       __$NotificationModelCopyWithImpl<$Res>;
   @override
-  $Res call({String title, String subTitle});
+  $Res call({int id, String title, String subTitle});
 }
 
 /// @nodoc
@@ -104,10 +112,15 @@ class __$NotificationModelCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? title = freezed,
     Object? subTitle = freezed,
   }) {
     return _then(_NotificationModel(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -126,11 +139,14 @@ class __$NotificationModelCopyWithImpl<$Res>
 class _$_NotificationModel
     with DiagnosticableTreeMixin
     implements _NotificationModel {
-  const _$_NotificationModel({required this.title, required this.subTitle});
+  const _$_NotificationModel(
+      {required this.id, required this.title, required this.subTitle});
 
   factory _$_NotificationModel.fromJson(Map<String, dynamic> json) =>
       _$_$_NotificationModelFromJson(json);
 
+  @override
+  final int id;
   @override
   final String title;
   @override
@@ -138,7 +154,7 @@ class _$_NotificationModel
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NotificationModel(title: $title, subTitle: $subTitle)';
+    return 'NotificationModel(id: $id, title: $title, subTitle: $subTitle)';
   }
 
   @override
@@ -146,6 +162,7 @@ class _$_NotificationModel
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NotificationModel'))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('subTitle', subTitle));
   }
@@ -154,6 +171,8 @@ class _$_NotificationModel
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _NotificationModel &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.subTitle, subTitle) ||
@@ -164,6 +183,7 @@ class _$_NotificationModel
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(subTitle);
 
@@ -180,11 +200,15 @@ class _$_NotificationModel
 
 abstract class _NotificationModel implements NotificationModel {
   const factory _NotificationModel(
-      {required String title, required String subTitle}) = _$_NotificationModel;
+      {required int id,
+      required String title,
+      required String subTitle}) = _$_NotificationModel;
 
   factory _NotificationModel.fromJson(Map<String, dynamic> json) =
       _$_NotificationModel.fromJson;
 
+  @override
+  int get id => throw _privateConstructorUsedError;
   @override
   String get title => throw _privateConstructorUsedError;
   @override

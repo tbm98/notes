@@ -8,6 +8,7 @@ part 'notification_model.g.dart';
 class NotificationModel with _$NotificationModel {
   @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory NotificationModel({
+    required int id,
     required String title,
     required String subTitle,
   }) = _NotificationModel;

@@ -2,11 +2,10 @@ import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:notes/src/config/global_constant.dart';
 import 'package:notes/src/models/note_model.dart';
-import 'package:notes/src/ui/screens/compose_notes/compose_note_page.dart';
-import 'package:notes/src/ui/screens/compose_notes/compose_note_state.dart';
-import 'package:notes/src/ui/screens/compose_notes/providers.dart';
+import 'package:notes/src/ui/screens/compose/compose_page.dart';
+import 'package:notes/src/ui/screens/compose/compose_state.dart';
+import 'package:notes/src/ui/screens/compose/providers.dart';
 import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
 import 'package:notes/src/ui/screens/todo/providers.dart';
 
@@ -99,12 +98,16 @@ class _ItemListRaw extends ConsumerWidget {
         void Function({NoteModel? returnValue}) action,
       ) {
         return ProviderScope(overrides: [
-          composeNoteProvider.overrideWithProvider(StateNotifierProvider
-              .autoDispose<ComposeNoteStateNotifier, ComposeNoteState>((ref) {
-            return ComposeNoteStateNotifier(
-                oldState: ComposeNoteState(noteModel: noteModel));
-          })),
-        ], child: ComposeNotePage(returnValueCallback: action));
+          composeProvider.overrideWithProvider(
+            StateNotifierProvider.autoDispose<ComposeStateNotifier,
+                ComposeState>(
+              (ref) {
+                return ComposeStateNotifier(
+                    oldState: ComposeState(noteModel: noteModel));
+              },
+            ),
+          ),
+        ], child: ComposePage(returnValueCallback: action));
       },
       closedElevation: 0.0,
       closedShape: const RoundedRectangleBorder(

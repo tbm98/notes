@@ -7,4 +7,10 @@ abstract class Notifications {
     required NotificationModel notificationModel,
     required DateTime dateTime,
   });
+
+  Future<bool> requestPermissions();
+
+  Future<void> cancelAllNotifications();
+
+  Future<void> cancelNotification(int id);
 }

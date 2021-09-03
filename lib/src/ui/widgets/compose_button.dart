@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notes/src/config/global_constant.dart';
 import 'package:notes/src/models/note_model.dart';
-import 'package:notes/src/ui/screens/compose_notes/compose_note_page.dart';
-import 'package:notes/src/ui/screens/compose_notes/providers.dart';
+import 'package:notes/src/ui/screens/compose/compose_page.dart';
+import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
 
-class AddNoteButton extends ConsumerWidget {
-  const AddNoteButton({
+class ComposeButton extends ConsumerWidget {
+  const ComposeButton({
     Key? key,
   }) : super(key: key);
 
@@ -18,7 +18,7 @@ class AddNoteButton extends ConsumerWidget {
         BuildContext context,
         void Function({NoteModel? returnValue}) action,
       ) {
-        return ComposeNotePage(returnValueCallback: action);
+        return ComposePage(returnValueCallback: action);
       },
       closedElevation: 6.0,
       closedShape: const RoundedRectangleBorder(
@@ -38,7 +38,7 @@ class AddNoteButton extends ConsumerWidget {
         if (returnValue == null) {
           return;
         }
-        await ref.read(composeNoteProvider.notifier).saveNote(returnValue);
+        await ref.read(allNoteProvider.notifier).addNote(returnValue);
       },
       transitionDuration: const Duration(milliseconds: 500),
     );

@@ -13,22 +13,25 @@ class TrashPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final trashes = ref.watch(trashProvider);
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Trash'),
           actions: [
-            IconButton(
-                onPressed: () async {
-                  final result = await showConfirmEmptyTrashDialog(context);
-                  if (result) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Trash is empty')));
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: const Text('Fail to empty trash')));
-                  }
-                },
-                icon: const Icon(CupertinoIcons.trash_slash))
+            if (trashes?.isNotEmpty == true)
+              IconButton(
+                  onPressed: () async {
+                    final result = await showConfirmEmptyTrashDialog(context);
+                    if (result) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Trash is empty')));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: const Text('Fail to empty trash')));
+                    }
+                  },
+                  icon: const Icon(CupertinoIcons.trash_slash))
           ],
         ),
         body: const _TrashBody());

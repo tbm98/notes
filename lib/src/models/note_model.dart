@@ -25,6 +25,8 @@ class NoteModel with _$NoteModel {
     @Default(false) bool movedToTrash,
   }) = _NoteModel;
 
+  int get notificationId => time! % 1000;
+
   DateTime? get alarmDate {
     if (alarm == null) {
       return null;

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:notes/src/ui/screens/compose_notes/providers.dart';
+import 'package:notes/src/ui/screens/compose/providers.dart';
 import 'package:notes/src/utils/time.dart';
 
 import 'notice_note_type_widget.dart';
@@ -33,7 +33,7 @@ class _AlarmPickedNoticeWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final alarm =
-        ref.watch(composeNoteProvider.select((value) => value.noteModel.alarmDate));
+        ref.watch(composeProvider.select((value) => value.noteModel.alarmDate));
     if (alarm == null) {
       return const SizedBox();
     }
@@ -68,7 +68,7 @@ class _DatePickedNoticeWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final date =
-        ref.watch(composeNoteProvider.select((value) => value.noteModel.timeDate));
+        ref.watch(composeProvider.select((value) => value.noteModel.timeDate));
     if (date == null) {
       return const SizedBox();
     }

@@ -1,15 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notes/src/config/enums.dart';
-import 'package:notes/src/core/storage/storage.dart';
-import 'package:notes/src/di/get_it.dart';
 import 'package:notes/src/models/note_model.dart';
 import 'package:notes/src/ui/screens/home/providers/tab_providers.dart';
 
-import 'compose_note_state.dart';
+import 'compose_state.dart';
 
-class ComposeNoteStateNotifier extends StateNotifier<ComposeNoteState> {
-  ComposeNoteStateNotifier({
-    required ComposeNoteState oldState,
+class ComposeStateNotifier extends StateNotifier<ComposeState> {
+  ComposeStateNotifier({
+    required ComposeState oldState,
     this.ref,
   }) : super(oldState);
 
@@ -51,29 +49,37 @@ class ComposeNoteStateNotifier extends StateNotifier<ComposeNoteState> {
     if (state.noteModel.title.isEmpty && state.noteModel.note.isEmpty) {
       return null;
     }
+
     if (state.noteModel.time == null) {
+      state = state.copyWith(
+          noteModel: state.noteModel
+              .copyWith(time: DateTime.now().millisecondsSinceEpoch));
+    }
+
+    // if todos => set time = now
+    if (state.noteModel.type == NoteType.todo) {
       return state.noteModel
           .copyWith(time: DateTime.now().millisecondsSinceEpoch);
     }
-    return state.noteModel;
-  }
-
-  Future<void> saveNote(NoteModel noteModel) async {
-    await getIt<Storage>().addNote(noteModel);
+    // if memory => set alarm = null
+    else {
+      return state.noteModel.copyWith(alarm: null);
+    }
   }
 }
 
-final composeNotePreferTypeProvider = StateProvider<NoteType>((ref) {
+final composePreferTypeProvider = StateProvider<NoteType>((ref) {
   final currentTab = ref.watch(currentTabProvider).state;
 
   return currentTab == 0 ? NoteType.todo : NoteType.memory;
 });
 
-final composeNoteProvider = StateNotifierProvider.autoDispose<
-    ComposeNoteStateNotifier, ComposeNoteState>((ref) {
-  final preferType = ref.watch(composeNotePreferTypeProvider).state;
-  return ComposeNoteStateNotifier(
-    oldState: ComposeNoteState.init(preferType),
+final composeProvider =
+    StateNotifierProvider.autoDispose<ComposeStateNotifier, ComposeState>(
+        (ref) {
+  final preferType = ref.watch(composePreferTypeProvider).state;
+  return ComposeStateNotifier(
+    oldState: ComposeState.init(preferType),
     ref: ref,
   );
 });
