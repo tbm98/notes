@@ -144,9 +144,10 @@ class _$SignedInUserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class _$SignedInUser with DiagnosticableTreeMixin implements SignedInUser {
+class _$SignedInUser extends SignedInUser with DiagnosticableTreeMixin {
   const _$SignedInUser(
-      {required this.displayName, required this.email, this.avatarUrl});
+      {required this.displayName, required this.email, this.avatarUrl})
+      : super._();
 
   factory _$SignedInUser.fromJson(Map<String, dynamic> json) =>
       _$_$SignedInUserFromJson(json);
@@ -252,11 +253,12 @@ class _$SignedInUser with DiagnosticableTreeMixin implements SignedInUser {
   }
 }
 
-abstract class SignedInUser implements User {
+abstract class SignedInUser extends User {
   const factory SignedInUser(
       {required String? displayName,
       required String? email,
       String? avatarUrl}) = _$SignedInUser;
+  const SignedInUser._() : super._();
 
   factory SignedInUser.fromJson(Map<String, dynamic> json) =
       _$SignedInUser.fromJson;
@@ -287,8 +289,8 @@ class _$GuestUserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GuestUser with DiagnosticableTreeMixin implements GuestUser {
-  const _$GuestUser();
+class _$GuestUser extends GuestUser with DiagnosticableTreeMixin {
+  const _$GuestUser() : super._();
 
   factory _$GuestUser.fromJson(Map<String, dynamic> json) =>
       _$_$GuestUserFromJson(json);
@@ -365,8 +367,9 @@ class _$GuestUser with DiagnosticableTreeMixin implements GuestUser {
   }
 }
 
-abstract class GuestUser implements User {
+abstract class GuestUser extends User {
   const factory GuestUser() = _$GuestUser;
+  const GuestUser._() : super._();
 
   factory GuestUser.fromJson(Map<String, dynamic> json) = _$GuestUser.fromJson;
 }

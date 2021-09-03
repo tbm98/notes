@@ -8,12 +8,17 @@ part 'user.g.dart';
 
 @freezed
 class User with _$User {
+  const User._();
   @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
   const factory User.signedIn({
     required String? displayName,
     required String? email,
     String? avatarUrl,
   }) = SignedInUser;
+
+  String? get getEmail {
+    return map(signedIn: (value) => value.email, guest: (_) => null);
+  }
 
   const factory User.guest() = GuestUser;
 

@@ -50,6 +50,9 @@ class LocalNotifications extends Notifications {
     required NotificationModel notificationModel,
     required DateTime dateTime,
   }) async {
+    if (dateTime.isBefore(DateTime.now())) {
+      return;
+    }
     await ready.future;
     await requestPermissions();
     flutterLocalNotificationsPlugin.zonedSchedule(

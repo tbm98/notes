@@ -10,6 +10,7 @@ final getIt = GetIt.instance;
 
 void setupGetIt() {
   getIt.registerLazySingleton<Auth>(() => GoogleAuth());
-  getIt.registerLazySingleton<Storage>(() => FirestoreStorage());
+  getIt.registerLazySingleton<Storage>(
+      () => FirestoreStorage(auth: getIt<Auth>()));
   getIt.registerLazySingleton<Notifications>(() => LocalNotifications());
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notes/src/ui/screens/memories/providers.dart';
+import 'package:notes/src/utils/time.dart';
 
 class MemoriesPage extends ConsumerWidget {
   const MemoriesPage({
@@ -26,6 +27,7 @@ class MemoriesPage extends ConsumerWidget {
         return ListTile(
           title: Text(noteModels[index].title),
           subtitle: Text(noteModels[index].note),
+          trailing: Text(formatDate(noteModels[index].timeDate)),
         );
       },
     );

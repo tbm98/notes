@@ -5,6 +5,8 @@ abstract class Storage {
 
   Future<bool> deleteNote(NoteModel noteModel);
 
+  Future<bool> deleteAccount();
+
   Future<bool> updateNote(NoteModel noteModel);
 
   Future<List<NoteModel>> getAllNote();

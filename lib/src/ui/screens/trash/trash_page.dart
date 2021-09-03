@@ -22,13 +22,23 @@ class TrashPage extends ConsumerWidget {
             if (trashes?.isNotEmpty == true)
               IconButton(
                   onPressed: () async {
-                    final result = await showConfirmEmptyTrashDialog(context);
-                    if (result) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Trash is empty')));
+                    final verifyResult = await showVerifyAccount(context,
+                        message:
+                            'Empty trash will delete notes in trash and can\'t undo');
+                    if (verifyResult) {
+                      final emptyResult =
+                          await ref.read(trashProvider.notifier).emptyTrash();
+                      if (emptyResult) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Trash is empty')));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Fail to empty trash')));
+                      }
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: const Text('Fail to empty trash')));
+                          const SnackBar(content: Text('Fail to empty trash')));
                     }
                   },
                   icon: const Icon(CupertinoIcons.trash_slash))

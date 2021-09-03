@@ -35,14 +35,18 @@ class AllNoteNotifier extends StateNotifier<List<NoteState>?> {
 
   Future<bool> updateNote(NoteModel noteModel) async {
     final result = await storage.updateNote(noteModel);
-    if (noteModel.alarmDate != null) {
+    if (noteModel.movedToTrash || noteModel.finished) {
       notifications.cancelNotification(noteModel.notificationId);
-      notifications.scheduleNotification(
-          notificationModel: NotificationModel(
-              id: noteModel.notificationId,
-              title: noteModel.title,
-              subTitle: noteModel.note),
-          dateTime: noteModel.alarmDate!);
+    } else {
+      if (noteModel.alarmDate != null) {
+        notifications.cancelNotification(noteModel.notificationId);
+        notifications.scheduleNotification(
+            notificationModel: NotificationModel(
+                id: noteModel.notificationId,
+                title: noteModel.title,
+                subTitle: noteModel.note),
+            dateTime: noteModel.alarmDate!);
+      }
     }
     return result;
   }

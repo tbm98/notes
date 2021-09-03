@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notes/src/config/global_constant.dart';
+import 'package:notes/src/core/notifications/notifications.dart';
+import 'package:notes/src/core/storage/storage.dart';
+import 'package:notes/src/di/get_it.dart';
+import 'package:notes/src/ui/dialogs/trash.dart';
 import 'package:notes/src/ui/screens/home/providers/profile_providers.dart';
 import 'package:notes/src/ui/screens/memories/providers.dart';
 import 'package:notes/src/ui/screens/todo/providers.dart';
@@ -40,7 +44,7 @@ class ProfileDialog extends ConsumerWidget {
           Divider(),
           _DataInfo(),
           Divider(),
-          _SwitchAccount()
+          _Actions()
         ],
       ),
     );
@@ -83,21 +87,93 @@ class _DataInfo extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todos = ref.watch(todoProvider)?.length ?? 0;
-    final finishedTodos = ref.watch(finishedTodoProvider)?.length ?? 0;
     final unfinishedTodos = ref.watch(unfinishedTodoProvider)?.length ?? 0;
     final memories = ref.watch(memoriesNoteProvider)?.length ?? 0;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(
+            child: _CountBox(
+          label: 'Todo unfinished',
+          count: unfinishedTodos,
+        )),
+        const SizedBox(width: 8),
+        Expanded(
+            child: _CountBox(
+          label: 'Memory',
+          count: memories,
+        )),
+      ],
+    );
+  }
+}
+
+class _CountBox extends StatelessWidget {
+  const _CountBox({
+    Key? key,
+    required this.label,
+    required this.count,
+  }) : super(key: key);
+
+  final String label;
+  final int count;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.only(left: avatarSize + 8),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(16)),
+      padding: const EdgeInsets.all(8),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(count.toString()),
           Text(
-              'Todo count: $todos ($unfinishedTodos unfinished, $finishedTodos done)'),
-          Text('Memory count: $memories'),
+            label,
+            textAlign: TextAlign.center,
+          )
         ],
+      ),
+    );
+  }
+}
+
+class _Actions extends StatelessWidget {
+  const _Actions({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: const [
+        _DeleteAccountButton(),
+        SizedBox(width: 8),
+        Expanded(child: _SwitchAccount()),
+      ],
+    );
+  }
+}
+
+class _DeleteAccountButton extends ConsumerWidget {
+  const _DeleteAccountButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return OutlinedButton(
+      onPressed: () async {
+        final verifyResult = await showVerifyAccount(context,
+            message: 'Delete account also delete all data, can\'t undo');
+        if (verifyResult) {
+          await getIt<Storage>().deleteAccount();
+          await ref.read(profileProvider.notifier).signOut();
+          await getIt<Notifications>().cancelAllNotifications();
+        }
+        Navigator.pop(context);
+      },
+      child: const Text(
+        'Delete account',
+        style: TextStyle(color: Colors.red),
       ),
     );
   }

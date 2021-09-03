@@ -119,9 +119,6 @@ class _ItemListRaw extends ConsumerWidget {
       ) {
         return ListTile(
           onTap: action,
-          onLongPress: () {
-            // TODO;
-          },
           tileColor: finished ? Colors.green : null,
           title: Text(noteModel.title, style: textStyle),
           subtitle: Text(noteModel.note, style: textStyle),

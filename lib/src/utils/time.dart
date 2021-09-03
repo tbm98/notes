@@ -19,6 +19,9 @@ Future<DateTime?> showDateTimePicker(BuildContext context) async {
   return DateTime(date.year, date.month, date.day, time.hour, time.minute);
 }
 
-String formatDate(DateTime dateTime) {
+String formatDate(DateTime? dateTime) {
+  if (dateTime == null) {
+    return '';
+  }
   return DateFormat('dd/MM/yyyy hh:mm').format(dateTime);
 }
