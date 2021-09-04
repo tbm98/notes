@@ -1,15 +1,11 @@
-# Notes
+# Notes [![codecov](https://codecov.io/gh/tbm98/notes/branch/main/graph/badge.svg?token=3EM4sRyDFi)](https://codecov.io/gh/tbm98/notes)
 
 My notes, todo list, and memories.
 
-[![codecov](https://codecov.io/gh/tbm98/notes/branch/main/graph/badge.svg?token=3EM4sRyDFi)](https://codecov.io/gh/tbm98/notes)
+| Android      | iOS | macOS | web |
+| ----------- | ----------- | ----------- | ----------- |
+| x      | x       |        |         |
 
-| Platform      | Available |
-| ----------- | ----------- |
-| Android      | x       |
-| iOS   | x        |
-| macOS   |         |
-| web   |         |
 
 Guest             |  Login                                  | Memories
 :-------------------------:|:-------------------------:|:-------------------------:
