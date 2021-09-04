@@ -179,7 +179,7 @@ class _ItemListRaw extends ConsumerWidget {
                     await allNoteNotifier
                         .updateNote(noteModel.copyWith(movedToTrash: true));
                     scaffoldMessager.showSnackBar(SnackBar(
-                      content: const Text('moved 1 note to trash'),
+                      content: const Text('Moved 1 note to trash'),
                       action: SnackBarAction(
                         label: 'Undo',
                         onPressed: () {

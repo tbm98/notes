@@ -112,7 +112,7 @@ class _TrashListRaw extends ConsumerWidget {
                     await allNoteNotifier.updateNote(
                         noteModels[index].copyWith(movedToTrash: false));
                     scaffoldMessager.showSnackBar(SnackBar(
-                      content: const Text('just restored a note'),
+                      content: const Text('Just restored a note'),
                       action: SnackBarAction(
                         label: 'Undo',
                         onPressed: () {

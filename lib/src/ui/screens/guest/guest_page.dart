@@ -14,12 +14,19 @@ class GuestPage extends ConsumerWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Welcome to Notes'),
-            ElevatedButton(
-                onPressed: () {
-                  ref.read(profileProvider.notifier).signIn();
-                },
-                child: Text('Connect and enjoy')),
+            Text(
+              'Notes',
+              style: TextStyle(
+                fontSize: 72,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                ref.read(profileProvider.notifier).signIn();
+              },
+              child: const Text('Login'),
+            ),
           ],
         ),
       ),
