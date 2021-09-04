@@ -1,6 +1,6 @@
 # Notes
 
-My notes, todo list and memories.
+My notes, todo list, and memories.
 
 [![codecov](https://codecov.io/gh/tbm98/notes/branch/main/graph/badge.svg?token=3EM4sRyDFi)](https://codecov.io/gh/tbm98/notes)
 
