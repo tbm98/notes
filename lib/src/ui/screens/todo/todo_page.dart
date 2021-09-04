@@ -8,6 +8,7 @@ import 'package:notes/src/ui/screens/compose/compose_state.dart';
 import 'package:notes/src/ui/screens/compose/providers.dart';
 import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
 import 'package:notes/src/ui/screens/todo/providers.dart';
+import 'package:notes/src/utils/time.dart';
 
 class TodoPage extends ConsumerWidget {
   const TodoPage({
@@ -29,32 +30,70 @@ class TodoPage extends ConsumerWidget {
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: const [
-          _SectionTodoListByStatus(finished: false),
-          _SectionTodoListByStatus(finished: true)
-        ],
+        children: const [_UnfinishedTodoList(), _FinishedTodoList()],
       ),
     );
   }
 }
 
-class _SectionTodoListByStatus extends ConsumerWidget {
-  const _SectionTodoListByStatus({
+class _UnfinishedTodoList extends ConsumerWidget {
+  const _UnfinishedTodoList({
     Key? key,
-    required this.finished,
   }) : super(key: key);
-  final bool finished;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todos = finished
-        ? ref.watch(finishedTodoProvider)
-        : ref.watch(unfinishedTodoProvider);
+    final todos = ref.watch(unfinishedTodoProvider);
     if (todos == null || todos.isEmpty) {
       return const SizedBox();
     }
 
     return _TodoListRaw(noteModels: todos.map((e) => e.noteModel).toList());
+  }
+}
+
+class _FinishedTodoList extends ConsumerWidget {
+  const _FinishedTodoList({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final todos = ref.watch(finishedTodoProvider);
+    if (todos == null || todos.isEmpty) {
+      return const SizedBox();
+    }
+
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: todos.length,
+      itemBuilder: (context, index) {
+        return _SectionFinishedTodoList(todos[index]);
+      },
+    );
+  }
+}
+
+class _SectionFinishedTodoList extends StatelessWidget {
+  const _SectionFinishedTodoList(this.todos, {Key? key}) : super(key: key);
+  final List<NoteModel> todos;
+
+  @override
+  Widget build(BuildContext context) {
+    final title = formatDateWithoutTime(todos[0].timeDate);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(8),
+            color: Theme.of(context).primaryColor.withAlpha(255 ~/ 4),
+            child: Text(title)),
+        _TodoListRaw(
+          noteModels: todos,
+        ),
+      ],
+    );
   }
 }
 
