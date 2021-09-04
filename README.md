@@ -19,5 +19,5 @@ Share memory             |  info                                  | Confirm empt
 
 # How to run?
 
-Follow [FlutterFire Overview](https://firebase.flutter.dev/docs/overview) for learn how to setup firebase.
+Follow [FlutterFire Overview](https://firebase.flutter.dev/docs/overview) to learn how to setup firebase.
 
