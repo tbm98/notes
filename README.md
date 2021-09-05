@@ -15,5 +15,5 @@ Share memory             |  info                                  | Confirm empt
 
 # How to run?
 
-Follow [FlutterFire Overview](https://firebase.flutter.dev/docs/overview) to learn how to setup firebase.
+Follow [FlutterFire Overview](https://firebase.flutter.dev/docs/overview) to learn how to setup firebase and then add your `google-services.json` (Android) and `GoogleService-Info.plist` (iOS).
 
