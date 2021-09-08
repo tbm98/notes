@@ -2,32 +2,32 @@ import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'user.freezed.dart';
+part 'user_model.freezed.dart';
 
-part 'user.g.dart';
+part 'user_model.g.dart';
 
 @freezed
-class User with _$User {
-  const User._();
+class UserModel with _$UserModel {
+  const UserModel._();
   @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-  const factory User.signedIn({
+  const factory UserModel.signedIn({
     required String? displayName,
     required String? email,
     String? avatarUrl,
-  }) = SignedInUser;
+  }) = SignedInUserModel;
 
   String? get getEmail {
     return map(signedIn: (value) => value.email, guest: (_) => null);
   }
 
-  const factory User.guest() = GuestUser;
+  const factory UserModel.guest() = GuestUserModel;
 
-  factory User.fromFirebaseUser(fb.User user) {
-    return User.signedIn(
+  factory UserModel.fromFirebaseUser(fb.User user) {
+    return UserModel.signedIn(
         displayName: user.displayName,
         email: user.email,
         avatarUrl: user.photoURL);
   }
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 }

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:notes/src/core/auth/auth.dart';
-import 'package:notes/src/models/user.dart';
+import 'package:notes/src/models/user_model.dart';
 
 class GoogleAuth extends Auth {
   late final _googleSignIn = GoogleSignIn();
@@ -29,21 +29,21 @@ class GoogleAuth extends Auth {
   }
 
   @override
-  Future<User> signIn() async {
+  Future<UserModel> signIn() async {
     final userCredential = await signInWithGoogle();
     if (userCredential == null || userCredential.user == null) {
-      return const User.guest();
+      return const UserModel.guest();
     }
-    return User.fromFirebaseUser(userCredential.user!);
+    return UserModel.fromFirebaseUser(userCredential.user!);
   }
 
   @override
-  User get currentUser {
+  UserModel get currentUser {
     final fbCurrentUser = FirebaseAuth.instance.currentUser;
     if (fbCurrentUser == null) {
-      return const User.guest();
+      return const UserModel.guest();
     }
-    return User.fromFirebaseUser(fbCurrentUser);
+    return UserModel.fromFirebaseUser(fbCurrentUser);
   }
 
   @override

@@ -1,7 +1,7 @@
-import 'package:notes/src/models/user.dart';
+import 'package:notes/src/models/user_model.dart';
 
 abstract class Auth {
-  User get currentUser;
-  Future<User> signIn();
+  UserModel get currentUser;
+  Future<UserModel> signIn();
   Future<void> signOut();
 }

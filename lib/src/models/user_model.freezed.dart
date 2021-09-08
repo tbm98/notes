@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
-part of 'user.dart';
+part of 'user_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -12,12 +12,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-User _$UserFromJson(Map<String, dynamic> json) {
+UserModel _$UserModelFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType'] as String) {
     case 'signedIn':
-      return SignedInUser.fromJson(json);
+      return SignedInUserModel.fromJson(json);
     case 'guest':
-      return GuestUser.fromJson(json);
+      return GuestUserModel.fromJson(json);
 
     default:
       throw FallThroughError();
@@ -25,34 +25,34 @@ User _$UserFromJson(Map<String, dynamic> json) {
 }
 
 /// @nodoc
-class _$UserTearOff {
-  const _$UserTearOff();
+class _$UserModelTearOff {
+  const _$UserModelTearOff();
 
-  SignedInUser signedIn(
+  SignedInUserModel signedIn(
       {required String? displayName,
       required String? email,
       String? avatarUrl}) {
-    return SignedInUser(
+    return SignedInUserModel(
       displayName: displayName,
       email: email,
       avatarUrl: avatarUrl,
     );
   }
 
-  GuestUser guest() {
-    return const GuestUser();
+  GuestUserModel guest() {
+    return const GuestUserModel();
   }
 
-  User fromJson(Map<String, Object> json) {
-    return User.fromJson(json);
+  UserModel fromJson(Map<String, Object> json) {
+    return UserModel.fromJson(json);
   }
 }
 
 /// @nodoc
-const $User = _$UserTearOff();
+const $UserModel = _$UserModelTearOff();
 
 /// @nodoc
-mixin _$User {
+mixin _$UserModel {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -71,14 +71,14 @@ mixin _$User {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SignedInUser value) signedIn,
-    required TResult Function(GuestUser value) guest,
+    required TResult Function(SignedInUserModel value) signedIn,
+    required TResult Function(GuestUserModel value) guest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignedInUser value)? signedIn,
-    TResult Function(GuestUser value)? guest,
+    TResult Function(SignedInUserModel value)? signedIn,
+    TResult Function(GuestUserModel value)? guest,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -86,37 +86,38 @@ mixin _$User {
 }
 
 /// @nodoc
-abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res>;
+abstract class $UserModelCopyWith<$Res> {
+  factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
+      _$UserModelCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._value, this._then);
+class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
+  _$UserModelCopyWithImpl(this._value, this._then);
 
-  final User _value;
+  final UserModel _value;
   // ignore: unused_field
-  final $Res Function(User) _then;
+  final $Res Function(UserModel) _then;
 }
 
 /// @nodoc
-abstract class $SignedInUserCopyWith<$Res> {
-  factory $SignedInUserCopyWith(
-          SignedInUser value, $Res Function(SignedInUser) then) =
-      _$SignedInUserCopyWithImpl<$Res>;
+abstract class $SignedInUserModelCopyWith<$Res> {
+  factory $SignedInUserModelCopyWith(
+          SignedInUserModel value, $Res Function(SignedInUserModel) then) =
+      _$SignedInUserModelCopyWithImpl<$Res>;
   $Res call({String? displayName, String? email, String? avatarUrl});
 }
 
 /// @nodoc
-class _$SignedInUserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
-    implements $SignedInUserCopyWith<$Res> {
-  _$SignedInUserCopyWithImpl(
-      SignedInUser _value, $Res Function(SignedInUser) _then)
-      : super(_value, (v) => _then(v as SignedInUser));
+class _$SignedInUserModelCopyWithImpl<$Res>
+    extends _$UserModelCopyWithImpl<$Res>
+    implements $SignedInUserModelCopyWith<$Res> {
+  _$SignedInUserModelCopyWithImpl(
+      SignedInUserModel _value, $Res Function(SignedInUserModel) _then)
+      : super(_value, (v) => _then(v as SignedInUserModel));
 
   @override
-  SignedInUser get _value => super._value as SignedInUser;
+  SignedInUserModel get _value => super._value as SignedInUserModel;
 
   @override
   $Res call({
@@ -124,7 +125,7 @@ class _$SignedInUserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? email = freezed,
     Object? avatarUrl = freezed,
   }) {
-    return _then(SignedInUser(
+    return _then(SignedInUserModel(
       displayName: displayName == freezed
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
@@ -144,13 +145,14 @@ class _$SignedInUserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
-class _$SignedInUser extends SignedInUser with DiagnosticableTreeMixin {
-  const _$SignedInUser(
+class _$SignedInUserModel extends SignedInUserModel
+    with DiagnosticableTreeMixin {
+  const _$SignedInUserModel(
       {required this.displayName, required this.email, this.avatarUrl})
       : super._();
 
-  factory _$SignedInUser.fromJson(Map<String, dynamic> json) =>
-      _$_$SignedInUserFromJson(json);
+  factory _$SignedInUserModel.fromJson(Map<String, dynamic> json) =>
+      _$_$SignedInUserModelFromJson(json);
 
   @override
   final String? displayName;
@@ -161,14 +163,14 @@ class _$SignedInUser extends SignedInUser with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User.signedIn(displayName: $displayName, email: $email, avatarUrl: $avatarUrl)';
+    return 'UserModel.signedIn(displayName: $displayName, email: $email, avatarUrl: $avatarUrl)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'User.signedIn'))
+      ..add(DiagnosticsProperty('type', 'UserModel.signedIn'))
       ..add(DiagnosticsProperty('displayName', displayName))
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('avatarUrl', avatarUrl));
@@ -177,7 +179,7 @@ class _$SignedInUser extends SignedInUser with DiagnosticableTreeMixin {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is SignedInUser &&
+        (other is SignedInUserModel &&
             (identical(other.displayName, displayName) ||
                 const DeepCollectionEquality()
                     .equals(other.displayName, displayName)) &&
@@ -197,8 +199,8 @@ class _$SignedInUser extends SignedInUser with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  $SignedInUserCopyWith<SignedInUser> get copyWith =>
-      _$SignedInUserCopyWithImpl<SignedInUser>(this, _$identity);
+  $SignedInUserModelCopyWith<SignedInUserModel> get copyWith =>
+      _$SignedInUserModelCopyWithImpl<SignedInUserModel>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -228,8 +230,8 @@ class _$SignedInUser extends SignedInUser with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SignedInUser value) signedIn,
-    required TResult Function(GuestUser value) guest,
+    required TResult Function(SignedInUserModel value) signedIn,
+    required TResult Function(GuestUserModel value) guest,
   }) {
     return signedIn(this);
   }
@@ -237,8 +239,8 @@ class _$SignedInUser extends SignedInUser with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignedInUser value)? signedIn,
-    TResult Function(GuestUser value)? guest,
+    TResult Function(SignedInUserModel value)? signedIn,
+    TResult Function(GuestUserModel value)? guest,
     required TResult orElse(),
   }) {
     if (signedIn != null) {
@@ -249,66 +251,68 @@ class _$SignedInUser extends SignedInUser with DiagnosticableTreeMixin {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$SignedInUserToJson(this)..['runtimeType'] = 'signedIn';
+    return _$_$SignedInUserModelToJson(this)..['runtimeType'] = 'signedIn';
   }
 }
 
-abstract class SignedInUser extends User {
-  const factory SignedInUser(
+abstract class SignedInUserModel extends UserModel {
+  const factory SignedInUserModel(
       {required String? displayName,
       required String? email,
-      String? avatarUrl}) = _$SignedInUser;
-  const SignedInUser._() : super._();
+      String? avatarUrl}) = _$SignedInUserModel;
+  const SignedInUserModel._() : super._();
 
-  factory SignedInUser.fromJson(Map<String, dynamic> json) =
-      _$SignedInUser.fromJson;
+  factory SignedInUserModel.fromJson(Map<String, dynamic> json) =
+      _$SignedInUserModel.fromJson;
 
   String? get displayName => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get avatarUrl => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SignedInUserCopyWith<SignedInUser> get copyWith =>
+  $SignedInUserModelCopyWith<SignedInUserModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GuestUserCopyWith<$Res> {
-  factory $GuestUserCopyWith(GuestUser value, $Res Function(GuestUser) then) =
-      _$GuestUserCopyWithImpl<$Res>;
+abstract class $GuestUserModelCopyWith<$Res> {
+  factory $GuestUserModelCopyWith(
+          GuestUserModel value, $Res Function(GuestUserModel) then) =
+      _$GuestUserModelCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$GuestUserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
-    implements $GuestUserCopyWith<$Res> {
-  _$GuestUserCopyWithImpl(GuestUser _value, $Res Function(GuestUser) _then)
-      : super(_value, (v) => _then(v as GuestUser));
+class _$GuestUserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
+    implements $GuestUserModelCopyWith<$Res> {
+  _$GuestUserModelCopyWithImpl(
+      GuestUserModel _value, $Res Function(GuestUserModel) _then)
+      : super(_value, (v) => _then(v as GuestUserModel));
 
   @override
-  GuestUser get _value => super._value as GuestUser;
+  GuestUserModel get _value => super._value as GuestUserModel;
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$GuestUser extends GuestUser with DiagnosticableTreeMixin {
-  const _$GuestUser() : super._();
+class _$GuestUserModel extends GuestUserModel with DiagnosticableTreeMixin {
+  const _$GuestUserModel() : super._();
 
-  factory _$GuestUser.fromJson(Map<String, dynamic> json) =>
-      _$_$GuestUserFromJson(json);
+  factory _$GuestUserModel.fromJson(Map<String, dynamic> json) =>
+      _$_$GuestUserModelFromJson(json);
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User.guest()';
+    return 'UserModel.guest()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'User.guest'));
+    properties..add(DiagnosticsProperty('type', 'UserModel.guest'));
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is GuestUser);
+    return identical(this, other) || (other is GuestUserModel);
   }
 
   @override
@@ -342,8 +346,8 @@ class _$GuestUser extends GuestUser with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(SignedInUser value) signedIn,
-    required TResult Function(GuestUser value) guest,
+    required TResult Function(SignedInUserModel value) signedIn,
+    required TResult Function(GuestUserModel value) guest,
   }) {
     return guest(this);
   }
@@ -351,8 +355,8 @@ class _$GuestUser extends GuestUser with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignedInUser value)? signedIn,
-    TResult Function(GuestUser value)? guest,
+    TResult Function(SignedInUserModel value)? signedIn,
+    TResult Function(GuestUserModel value)? guest,
     required TResult orElse(),
   }) {
     if (guest != null) {
@@ -363,13 +367,14 @@ class _$GuestUser extends GuestUser with DiagnosticableTreeMixin {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$GuestUserToJson(this)..['runtimeType'] = 'guest';
+    return _$_$GuestUserModelToJson(this)..['runtimeType'] = 'guest';
   }
 }
 
-abstract class GuestUser extends User {
-  const factory GuestUser() = _$GuestUser;
-  const GuestUser._() : super._();
+abstract class GuestUserModel extends UserModel {
+  const factory GuestUserModel() = _$GuestUserModel;
+  const GuestUserModel._() : super._();
 
-  factory GuestUser.fromJson(Map<String, dynamic> json) = _$GuestUser.fromJson;
+  factory GuestUserModel.fromJson(Map<String, dynamic> json) =
+      _$GuestUserModel.fromJson;
 }
