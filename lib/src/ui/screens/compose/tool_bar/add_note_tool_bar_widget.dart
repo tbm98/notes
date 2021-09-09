@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:notes/src/ui/screens/compose/tool_bar/providers.dart';
-import 'package:notes/src/ui/widgets/my_animated_size.dart';
 import 'package:notes/src/utils/time.dart';
 
 import '../providers.dart';
@@ -47,7 +46,7 @@ class _BuildAnimatedItems extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final expanded = ref.watch(toolbarExpandedProvider);
-    return MyAnimatedSize(
+    return AnimatedSize(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOutCubic,
       child: expanded ? const _BuildItems() : const SizedBox(),

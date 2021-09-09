@@ -16,10 +16,10 @@ class NoticeNoteInfoWidget extends ConsumerWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        const NoticeNoteTypeWidget(),
-        const _AlarmPickedNoticeWidget(),
-        const _DatePickedNoticeWidget(),
+      children: const [
+        NoticeNoteTypeWidget(),
+        _AlarmPickedNoticeWidget(),
+        _DatePickedNoticeWidget(),
       ],
     );
   }
