@@ -10,7 +10,7 @@ _$_NoteModel _$_$_NoteModelFromJson(Map<String, dynamic> json) {
   return _$_NoteModel(
     id: json['id'] as String,
     title: json['title'] as String? ?? '',
-    note: json['note'] as String? ?? '',
+    subTitle: json['sub_title'] as String? ?? '',
     alarm: json['alarm'] as int?,
     time: json['time'] as int?,
     type: _$enumDecode(_$NoteTypeEnumMap, json['type'],
@@ -25,7 +25,7 @@ Map<String, dynamic> _$_$_NoteModelToJson(_$_NoteModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'note': instance.note,
+      'sub_title': instance.subTitle,
       'alarm': instance.alarm,
       'time': instance.time,
       'type': _$NoteTypeEnumMap[instance.type],

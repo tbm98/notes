@@ -160,7 +160,7 @@ class _ItemListRaw extends ConsumerWidget {
           onTap: action,
           tileColor: finished ? Colors.green : null,
           title: Text(noteModel.title, style: textStyle),
-          subtitle: Text(noteModel.note, style: textStyle),
+          subtitle: Text(noteModel.subTitle, style: textStyle),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

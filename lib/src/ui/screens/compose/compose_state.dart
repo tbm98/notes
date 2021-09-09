@@ -16,7 +16,7 @@ class ComposeState with _$ComposeState {
   }) = _ComposeState;
 
   factory ComposeState.init(NoteType type) => ComposeState(
-      noteModel: NoteModel(id: uuid.v4(), title: '', note: '', type: type));
+      noteModel: NoteModel(id: uuid.v4(), title: '', subTitle: '', type: type));
 
   factory ComposeState.fromJson(Map<String, dynamic> json) =>
       _$ComposeStateFromJson(json);

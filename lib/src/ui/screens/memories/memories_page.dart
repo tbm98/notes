@@ -28,7 +28,7 @@ class MemoriesPage extends ConsumerWidget {
       itemBuilder: (context, index) {
         return ListTile(
           title: Text(noteModels[index].title),
-          subtitle: Text(noteModels[index].note),
+          subtitle: Text(noteModels[index].subTitle),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

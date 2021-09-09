@@ -44,7 +44,7 @@ class AllNoteNotifier extends StateNotifier<List<NoteState>?> {
             notificationModel: NotificationModel(
                 id: noteModel.notificationId,
                 title: noteModel.title,
-                subTitle: noteModel.note),
+                subTitle: noteModel.subTitle),
             dateTime: noteModel.alarmDate!);
       }
     }
@@ -58,7 +58,7 @@ class AllNoteNotifier extends StateNotifier<List<NoteState>?> {
           notificationModel: NotificationModel(
               id: noteModel.notificationId,
               title: noteModel.title,
-              subTitle: noteModel.note),
+              subTitle: noteModel.subTitle),
           dateTime: noteModel.alarmDate!);
     }
   }

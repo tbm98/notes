@@ -54,8 +54,8 @@ class _AddNotePageState extends ConsumerState<ComposePage> {
       _titleController.text = composeState.noteModel.title;
     }
     if (_noteController.text.isEmpty &&
-        composeState.noteModel.note.isNotEmpty) {
-      _noteController.text = composeState.noteModel.note;
+        composeState.noteModel.subTitle.isNotEmpty) {
+      _noteController.text = composeState.noteModel.subTitle;
     }
     return Scaffold(
       appBar: AppBar(

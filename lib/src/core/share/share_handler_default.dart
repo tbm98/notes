@@ -7,6 +7,6 @@ class ShareHandlerDefault extends ShareHandler {
   @override
   Future<void> share(NoteModel noteModel) async {
     await Share.share(
-        '${noteModel.title} - ${formatDate(noteModel.timeDate)}\n${noteModel.note}');
+        '${noteModel.title} - ${formatDate(noteModel.timeDate)}\n${noteModel.subTitle}');
   }
 }

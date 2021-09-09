@@ -16,7 +16,7 @@ class NoteModel with _$NoteModel {
   const factory NoteModel({
     required String id,
     @JsonKey(defaultValue: '') required String title,
-    @JsonKey(defaultValue: '') required String note,
+    @JsonKey(defaultValue: '') required String subTitle,
     int? alarm,
     int? time,
     @JsonKey(unknownEnumValue: NoteType.memory) required NoteType type,

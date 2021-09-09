@@ -23,7 +23,7 @@ class _$NoteModelTearOff {
   _NoteModel call(
       {required String id,
       @JsonKey(defaultValue: '') required String title,
-      @JsonKey(defaultValue: '') required String note,
+      @JsonKey(defaultValue: '') required String subTitle,
       int? alarm,
       int? time,
       @JsonKey(unknownEnumValue: NoteType.memory) required NoteType type,
@@ -33,7 +33,7 @@ class _$NoteModelTearOff {
     return _NoteModel(
       id: id,
       title: title,
-      note: note,
+      subTitle: subTitle,
       alarm: alarm,
       time: time,
       type: type,
@@ -57,7 +57,7 @@ mixin _$NoteModel {
   @JsonKey(defaultValue: '')
   String get title => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: '')
-  String get note => throw _privateConstructorUsedError;
+  String get subTitle => throw _privateConstructorUsedError;
   int? get alarm => throw _privateConstructorUsedError;
   int? get time => throw _privateConstructorUsedError;
   @JsonKey(unknownEnumValue: NoteType.memory)
@@ -80,7 +80,7 @@ abstract class $NoteModelCopyWith<$Res> {
   $Res call(
       {String id,
       @JsonKey(defaultValue: '') String title,
-      @JsonKey(defaultValue: '') String note,
+      @JsonKey(defaultValue: '') String subTitle,
       int? alarm,
       int? time,
       @JsonKey(unknownEnumValue: NoteType.memory) NoteType type,
@@ -101,7 +101,7 @@ class _$NoteModelCopyWithImpl<$Res> implements $NoteModelCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? title = freezed,
-    Object? note = freezed,
+    Object? subTitle = freezed,
     Object? alarm = freezed,
     Object? time = freezed,
     Object? type = freezed,
@@ -118,9 +118,9 @@ class _$NoteModelCopyWithImpl<$Res> implements $NoteModelCopyWith<$Res> {
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      note: note == freezed
-          ? _value.note
-          : note // ignore: cast_nullable_to_non_nullable
+      subTitle: subTitle == freezed
+          ? _value.subTitle
+          : subTitle // ignore: cast_nullable_to_non_nullable
               as String,
       alarm: alarm == freezed
           ? _value.alarm
@@ -159,7 +159,7 @@ abstract class _$NoteModelCopyWith<$Res> implements $NoteModelCopyWith<$Res> {
   $Res call(
       {String id,
       @JsonKey(defaultValue: '') String title,
-      @JsonKey(defaultValue: '') String note,
+      @JsonKey(defaultValue: '') String subTitle,
       int? alarm,
       int? time,
       @JsonKey(unknownEnumValue: NoteType.memory) NoteType type,
@@ -181,7 +181,7 @@ class __$NoteModelCopyWithImpl<$Res> extends _$NoteModelCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? title = freezed,
-    Object? note = freezed,
+    Object? subTitle = freezed,
     Object? alarm = freezed,
     Object? time = freezed,
     Object? type = freezed,
@@ -198,9 +198,9 @@ class __$NoteModelCopyWithImpl<$Res> extends _$NoteModelCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      note: note == freezed
-          ? _value.note
-          : note // ignore: cast_nullable_to_non_nullable
+      subTitle: subTitle == freezed
+          ? _value.subTitle
+          : subTitle // ignore: cast_nullable_to_non_nullable
               as String,
       alarm: alarm == freezed
           ? _value.alarm
@@ -237,7 +237,7 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
   const _$_NoteModel(
       {required this.id,
       @JsonKey(defaultValue: '') required this.title,
-      @JsonKey(defaultValue: '') required this.note,
+      @JsonKey(defaultValue: '') required this.subTitle,
       this.alarm,
       this.time,
       @JsonKey(unknownEnumValue: NoteType.memory) required this.type,
@@ -256,7 +256,7 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
   final String title;
   @override
   @JsonKey(defaultValue: '')
-  final String note;
+  final String subTitle;
   @override
   final int? alarm;
   @override
@@ -275,7 +275,7 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NoteModel(id: $id, title: $title, note: $note, alarm: $alarm, time: $time, type: $type, finished: $finished, fbDocsId: $fbDocsId, movedToTrash: $movedToTrash)';
+    return 'NoteModel(id: $id, title: $title, subTitle: $subTitle, alarm: $alarm, time: $time, type: $type, finished: $finished, fbDocsId: $fbDocsId, movedToTrash: $movedToTrash)';
   }
 
   @override
@@ -285,7 +285,7 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'NoteModel'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('note', note))
+      ..add(DiagnosticsProperty('subTitle', subTitle))
       ..add(DiagnosticsProperty('alarm', alarm))
       ..add(DiagnosticsProperty('time', time))
       ..add(DiagnosticsProperty('type', type))
@@ -302,8 +302,9 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
-            (identical(other.note, note) ||
-                const DeepCollectionEquality().equals(other.note, note)) &&
+            (identical(other.subTitle, subTitle) ||
+                const DeepCollectionEquality()
+                    .equals(other.subTitle, subTitle)) &&
             (identical(other.alarm, alarm) ||
                 const DeepCollectionEquality().equals(other.alarm, alarm)) &&
             (identical(other.time, time) ||
@@ -326,7 +327,7 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(note) ^
+      const DeepCollectionEquality().hash(subTitle) ^
       const DeepCollectionEquality().hash(alarm) ^
       const DeepCollectionEquality().hash(time) ^
       const DeepCollectionEquality().hash(type) ^
@@ -349,7 +350,7 @@ abstract class _NoteModel extends NoteModel {
   const factory _NoteModel(
       {required String id,
       @JsonKey(defaultValue: '') required String title,
-      @JsonKey(defaultValue: '') required String note,
+      @JsonKey(defaultValue: '') required String subTitle,
       int? alarm,
       int? time,
       @JsonKey(unknownEnumValue: NoteType.memory) required NoteType type,
@@ -368,7 +369,7 @@ abstract class _NoteModel extends NoteModel {
   String get title => throw _privateConstructorUsedError;
   @override
   @JsonKey(defaultValue: '')
-  String get note => throw _privateConstructorUsedError;
+  String get subTitle => throw _privateConstructorUsedError;
   @override
   int? get alarm => throw _privateConstructorUsedError;
   @override

@@ -21,7 +21,7 @@ class ComposeStateNotifier extends StateNotifier<ComposeState> {
 
   void changedNote(String value) => state = state.copyWith(
         noteModel: state.noteModel.copyWith(
-          note: value,
+          subTitle: value,
         ),
       );
 
@@ -46,7 +46,7 @@ class ComposeStateNotifier extends StateNotifier<ComposeState> {
 
   /// return a note to save to storage, if title and note is empty => return null
   NoteModel? composeResult() {
-    if (state.noteModel.title.isEmpty && state.noteModel.note.isEmpty) {
+    if (state.noteModel.title.isEmpty && state.noteModel.subTitle.isEmpty) {
       return null;
     }
 
