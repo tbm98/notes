@@ -17,14 +17,15 @@ class AvatarWidget extends ConsumerWidget {
     final user = ref.watch(profileProvider);
 
     return user.map(
-      signedIn: (value) => _SignedInAvatar(user: value),
-      guest: (_) => const _GuestAvatar(),
+      signedIn: (value) => SignedInAvatar(user: value),
+      guest: (_) => const GuestAvatar(),
     );
   }
 }
 
-class _SignedInAvatar extends ConsumerWidget {
-  const _SignedInAvatar({
+@visibleForTesting
+class SignedInAvatar extends ConsumerWidget {
+  const SignedInAvatar({
     Key? key,
     required this.user,
   }) : super(key: key);
@@ -49,8 +50,9 @@ class _SignedInAvatar extends ConsumerWidget {
   }
 }
 
-class _GuestAvatar extends ConsumerWidget {
-  const _GuestAvatar({
+@visibleForTesting
+class GuestAvatar extends ConsumerWidget {
+  const GuestAvatar({
     Key? key,
   }) : super(key: key);
 

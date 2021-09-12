@@ -7,8 +7,14 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:notes/main.dart';
+import 'package:notes/src/core/auth/auth.dart';
+import 'package:notes/src/core/notifications/notifications.dart';
+import 'package:notes/src/core/share/share_handler.dart';
+import 'package:notes/src/core/storage/storage.dart';
 
+@GenerateMocks([Auth, Storage, Notifications, ShareHandler])
 void main() {
   testWidgets('App smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.

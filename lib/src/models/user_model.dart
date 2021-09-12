@@ -29,5 +29,6 @@ class UserModel with _$UserModel {
         avatarUrl: user.photoURL);
   }
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
 }

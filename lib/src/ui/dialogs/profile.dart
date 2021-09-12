@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:notes/src/config/naming.dart';
 import 'package:notes/src/core/notifications/notifications.dart';
 import 'package:notes/src/core/storage/storage.dart';
 import 'package:notes/src/di/get_it.dart';
@@ -171,7 +172,7 @@ class _DeleteAccountButton extends ConsumerWidget {
         Navigator.pop(context);
       },
       child: const Text(
-        'Delete account',
+        deleteAccount,
         style: TextStyle(color: Colors.red),
       ),
     );
@@ -188,9 +189,10 @@ class _SwitchAccount extends ConsumerWidget {
     return OutlinedButton(
       onPressed: () {
         ref.read(profileProvider.notifier).signOut();
+        getIt<Notifications>().cancelAllNotifications();
         Navigator.pop(context);
       },
-      child: const Text('Switch account'),
+      child: const Text(switchAccount),
     );
   }
 }

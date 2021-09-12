@@ -26,7 +26,7 @@ String formatDate(DateTime? dateTime) {
   return DateFormat('dd/MM/yyyy hh:mm').format(dateTime);
 }
 
-String formatDateWithoutTime(DateTime? dateTime){
+String formatDateWithoutTime(DateTime? dateTime) {
   if (dateTime == null) {
     return '';
   }

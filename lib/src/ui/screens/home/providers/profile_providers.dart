@@ -18,7 +18,8 @@ class ProfileNotifier extends StateNotifier<UserModel> {
   }
 }
 
-final profileProvider = StateNotifierProvider<ProfileNotifier, UserModel>((ref) {
+final profileProvider =
+    StateNotifierProvider<ProfileNotifier, UserModel>((ref) {
   final auth = getIt<Auth>();
   final currentUser = auth.currentUser;
   return ProfileNotifier(user: currentUser, auth: auth);
