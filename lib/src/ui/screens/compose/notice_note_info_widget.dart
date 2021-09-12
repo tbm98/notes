@@ -19,7 +19,6 @@ class NoticeNoteInfoWidget extends ConsumerWidget {
       children: const [
         NoticeNoteTypeWidget(),
         _AlarmPickedNoticeWidget(),
-        _DatePickedNoticeWidget(),
       ],
     );
   }
@@ -53,41 +52,6 @@ class _AlarmPickedNoticeWidget extends ConsumerWidget {
             ),
             Text(
               formatDate(alarm),
-              style: const TextStyle(fontSize: 14),
-            ),
-          ],
-        ));
-  }
-}
-
-class _DatePickedNoticeWidget extends ConsumerWidget {
-  const _DatePickedNoticeWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final date =
-        ref.watch(composeProvider.select((value) => value.noteModel.timeDate));
-    if (date == null) {
-      return const SizedBox();
-    }
-
-    return Container(
-        decoration: BoxDecoration(
-            color: Colors.green.shade200,
-            borderRadius: BorderRadius.circular(4)),
-        padding: const EdgeInsets.all(2),
-        margin: const EdgeInsets.only(top: 2),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(
-              Icons.today_outlined,
-              size: 14,
-            ),
-            Text(
-              formatDate(date),
               style: const TextStyle(fontSize: 14),
             ),
           ],
