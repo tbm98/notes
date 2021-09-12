@@ -94,7 +94,7 @@ class _TrashListRaw extends ConsumerWidget {
             style: textStyle,
           ),
           subtitle: Text(
-            noteModels[index].fbDocsId ?? '',
+            noteModels[index].subTitle,
             style: textStyle,
           ),
           trailing: Row(
