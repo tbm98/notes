@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'note_state.dart';
 
@@ -134,7 +135,7 @@ class _$_NoteState with DiagnosticableTreeMixin implements _NoteState {
   const _$_NoteState({required this.noteModel, this.selected = false});
 
   factory _$_NoteState.fromJson(Map<String, dynamic> json) =>
-      _$_$_NoteStateFromJson(json);
+      _$$_NoteStateFromJson(json);
 
   @override
   final NoteModel noteModel;
@@ -181,7 +182,7 @@ class _$_NoteState with DiagnosticableTreeMixin implements _NoteState {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_NoteStateToJson(this);
+    return _$$_NoteStateToJson(this);
   }
 }
 

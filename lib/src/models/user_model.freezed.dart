@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'user_model.dart';
 
@@ -13,14 +14,15 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType'] as String) {
+  switch (json['runtimeType'] as String?) {
     case 'signedIn':
       return SignedInUserModel.fromJson(json);
     case 'guest':
       return GuestUserModel.fromJson(json);
 
     default:
-      throw FallThroughError();
+      throw CheckedFromJsonException(json, 'runtimeType', 'UserModel',
+          'Invalid union type "${json['runtimeType']}"!');
   }
 }
 
@@ -62,6 +64,13 @@ mixin _$UserModel {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String? displayName, String? email, String? avatarUrl)?
+        signedIn,
+    TResult Function()? guest,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? displayName, String? email, String? avatarUrl)?
         signedIn,
@@ -73,6 +82,12 @@ mixin _$UserModel {
   TResult map<TResult extends Object?>({
     required TResult Function(SignedInUserModel value) signedIn,
     required TResult Function(GuestUserModel value) guest,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SignedInUserModel value)? signedIn,
+    TResult Function(GuestUserModel value)? guest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -152,7 +167,7 @@ class _$SignedInUserModel extends SignedInUserModel
       : super._();
 
   factory _$SignedInUserModel.fromJson(Map<String, dynamic> json) =>
-      _$_$SignedInUserModelFromJson(json);
+      _$$SignedInUserModelFromJson(json);
 
   @override
   final String? displayName;
@@ -215,6 +230,16 @@ class _$SignedInUserModel extends SignedInUserModel
 
   @override
   @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String? displayName, String? email, String? avatarUrl)?
+        signedIn,
+    TResult Function()? guest,
+  }) {
+    return signedIn?.call(displayName, email, avatarUrl);
+  }
+
+  @override
+  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? displayName, String? email, String? avatarUrl)?
         signedIn,
@@ -238,6 +263,15 @@ class _$SignedInUserModel extends SignedInUserModel
 
   @override
   @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SignedInUserModel value)? signedIn,
+    TResult Function(GuestUserModel value)? guest,
+  }) {
+    return signedIn?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignedInUserModel value)? signedIn,
     TResult Function(GuestUserModel value)? guest,
@@ -251,7 +285,7 @@ class _$SignedInUserModel extends SignedInUserModel
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$SignedInUserModelToJson(this)..['runtimeType'] = 'signedIn';
+    return _$$SignedInUserModelToJson(this)..['runtimeType'] = 'signedIn';
   }
 }
 
@@ -297,7 +331,7 @@ class _$GuestUserModel extends GuestUserModel with DiagnosticableTreeMixin {
   const _$GuestUserModel() : super._();
 
   factory _$GuestUserModel.fromJson(Map<String, dynamic> json) =>
-      _$_$GuestUserModelFromJson(json);
+      _$$GuestUserModelFromJson(json);
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -331,6 +365,16 @@ class _$GuestUserModel extends GuestUserModel with DiagnosticableTreeMixin {
 
   @override
   @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String? displayName, String? email, String? avatarUrl)?
+        signedIn,
+    TResult Function()? guest,
+  }) {
+    return guest?.call();
+  }
+
+  @override
+  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? displayName, String? email, String? avatarUrl)?
         signedIn,
@@ -354,6 +398,15 @@ class _$GuestUserModel extends GuestUserModel with DiagnosticableTreeMixin {
 
   @override
   @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SignedInUserModel value)? signedIn,
+    TResult Function(GuestUserModel value)? guest,
+  }) {
+    return guest?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignedInUserModel value)? signedIn,
     TResult Function(GuestUserModel value)? guest,
@@ -367,7 +420,7 @@ class _$GuestUserModel extends GuestUserModel with DiagnosticableTreeMixin {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$GuestUserModelToJson(this)..['runtimeType'] = 'guest';
+    return _$$GuestUserModelToJson(this)..['runtimeType'] = 'guest';
   }
 }
 

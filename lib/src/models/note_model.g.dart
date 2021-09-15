@@ -6,22 +6,20 @@ part of 'note_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_NoteModel _$_$_NoteModelFromJson(Map<String, dynamic> json) {
-  return _$_NoteModel(
-    id: json['id'] as String,
-    title: json['title'] as String? ?? '',
-    subTitle: json['sub_title'] as String? ?? '',
-    alarm: json['alarm'] as int?,
-    time: json['time'] as int?,
-    type: _$enumDecode(_$NoteTypeEnumMap, json['type'],
-        unknownValue: NoteType.memory),
-    finished: json['finished'] as bool? ?? false,
-    fbDocsId: json['fb_docs_id'] as String?,
-    movedToTrash: json['moved_to_trash'] as bool? ?? false,
-  );
-}
+_$_NoteModel _$$_NoteModelFromJson(Map<String, dynamic> json) => _$_NoteModel(
+      id: json['id'] as String,
+      title: json['title'] as String? ?? '',
+      subTitle: json['sub_title'] as String? ?? '',
+      alarm: json['alarm'] as int?,
+      time: json['time'] as int?,
+      type: _$enumDecode(_$NoteTypeEnumMap, json['type'],
+          unknownValue: NoteType.memory),
+      finished: json['finished'] as bool? ?? false,
+      fbDocsId: json['fb_docs_id'] as String?,
+      movedToTrash: json['moved_to_trash'] as bool? ?? false,
+    );
 
-Map<String, dynamic> _$_$_NoteModelToJson(_$_NoteModel instance) =>
+Map<String, dynamic> _$$_NoteModelToJson(_$_NoteModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

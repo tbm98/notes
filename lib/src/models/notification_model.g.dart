@@ -6,15 +6,14 @@ part of 'notification_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_NotificationModel _$_$_NotificationModelFromJson(Map<String, dynamic> json) {
-  return _$_NotificationModel(
-    id: json['id'] as int,
-    title: json['title'] as String,
-    subTitle: json['sub_title'] as String,
-  );
-}
+_$_NotificationModel _$$_NotificationModelFromJson(Map<String, dynamic> json) =>
+    _$_NotificationModel(
+      id: json['id'] as int,
+      title: json['title'] as String,
+      subTitle: json['sub_title'] as String,
+    );
 
-Map<String, dynamic> _$_$_NotificationModelToJson(
+Map<String, dynamic> _$$_NotificationModelToJson(
         _$_NotificationModel instance) =>
     <String, dynamic>{
       'id': instance.id,
