@@ -16,8 +16,8 @@ Future<void> showProfileDialog(BuildContext context) async {
     context: context,
     builder: (BuildContext context) {
       return Dialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0)), //this right here
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
         child: const IntrinsicHeight(child: ProfileDialog()),
       );
     },

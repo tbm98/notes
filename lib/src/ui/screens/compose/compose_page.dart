@@ -22,15 +22,9 @@ class ComposePage extends ConsumerStatefulWidget {
 }
 
 class _AddNotePageState extends ConsumerState<ComposePage> {
-  late final FocusNode _contentFocusNode;
+  final FocusNode _contentFocusNode = FocusNode();
   final _titleController = TextEditingController();
   final _noteController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _contentFocusNode = FocusNode();
-  }
 
   @override
   void dispose() {
