@@ -13,6 +13,10 @@ Guest             |  Login                                  | Memories
 Share memory             |  info                                  | Confirm empty trash
 ![](./screenshots/share_memory.png)  |  ![](./screenshots/info.png) | ![](./screenshots/confirm_empty_trash.png)
 
+# Why I use get_it for DI ?
+
+get_it is the powerful package for DI and many developer use it. So I want to implement a instance which combine riverpod vs get_it. 
+
 # How to run?
 
 Follow [FlutterFire Overview](https://firebase.flutter.dev/docs/overview) to learn how to setup firebase and then add your `google-services.json` (Android) and `GoogleService-Info.plist` (iOS).
