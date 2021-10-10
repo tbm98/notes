@@ -45,7 +45,7 @@ class _$UserModelTearOff {
     return const GuestUserModel();
   }
 
-  UserModel fromJson(Map<String, Object> json) {
+  UserModel fromJson(Map<String, Object?> json) {
     return UserModel.fromJson(json);
   }
 }
@@ -194,23 +194,17 @@ class _$SignedInUserModel extends SignedInUserModel
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is SignedInUserModel &&
+        (other.runtimeType == runtimeType &&
+            other is SignedInUserModel &&
             (identical(other.displayName, displayName) ||
-                const DeepCollectionEquality()
-                    .equals(other.displayName, displayName)) &&
-            (identical(other.email, email) ||
-                const DeepCollectionEquality().equals(other.email, email)) &&
+                other.displayName == displayName) &&
+            (identical(other.email, email) || other.email == email) &&
             (identical(other.avatarUrl, avatarUrl) ||
-                const DeepCollectionEquality()
-                    .equals(other.avatarUrl, avatarUrl)));
+                other.avatarUrl == avatarUrl));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(displayName) ^
-      const DeepCollectionEquality().hash(email) ^
-      const DeepCollectionEquality().hash(avatarUrl);
+  int get hashCode => Object.hash(runtimeType, displayName, email, avatarUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -299,9 +293,9 @@ abstract class SignedInUserModel extends UserModel {
   factory SignedInUserModel.fromJson(Map<String, dynamic> json) =
       _$SignedInUserModel.fromJson;
 
-  String? get displayName => throw _privateConstructorUsedError;
-  String? get email => throw _privateConstructorUsedError;
-  String? get avatarUrl => throw _privateConstructorUsedError;
+  String? get displayName;
+  String? get email;
+  String? get avatarUrl;
   @JsonKey(ignore: true)
   $SignedInUserModelCopyWith<SignedInUserModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -346,7 +340,8 @@ class _$GuestUserModel extends GuestUserModel with DiagnosticableTreeMixin {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is GuestUserModel);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is GuestUserModel);
   }
 
   @override

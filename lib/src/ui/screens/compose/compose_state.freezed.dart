@@ -27,7 +27,7 @@ class _$ComposeStateTearOff {
     );
   }
 
-  ComposeState fromJson(Map<String, Object> json) {
+  ComposeState fromJson(Map<String, Object?> json) {
     return ComposeState.fromJson(json);
   }
 }
@@ -147,15 +147,14 @@ class _$_ComposeState with DiagnosticableTreeMixin implements _ComposeState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ComposeState &&
+        (other.runtimeType == runtimeType &&
+            other is _ComposeState &&
             (identical(other.noteModel, noteModel) ||
-                const DeepCollectionEquality()
-                    .equals(other.noteModel, noteModel)));
+                other.noteModel == noteModel));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(noteModel);
+  int get hashCode => Object.hash(runtimeType, noteModel);
 
   @JsonKey(ignore: true)
   @override
@@ -175,7 +174,7 @@ abstract class _ComposeState implements ComposeState {
       _$_ComposeState.fromJson;
 
   @override
-  NoteModel get noteModel => throw _privateConstructorUsedError;
+  NoteModel get noteModel;
   @override
   @JsonKey(ignore: true)
   _$ComposeStateCopyWith<_ComposeState> get copyWith =>
