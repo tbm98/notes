@@ -137,15 +137,8 @@ class _ItemListRaw extends ConsumerWidget {
         void Function({NoteModel? returnValue}) action,
       ) {
         return ProviderScope(overrides: [
-          composeProvider.overrideWithProvider(
-            StateNotifierProvider.autoDispose<ComposeStateNotifier,
-                ComposeState>(
-              (ref) {
-                return ComposeStateNotifier(
-                    oldState: ComposeState(noteModel: noteModel));
-              },
-            ),
-          ),
+          composeProvider.overrideWithValue(ComposeStateNotifier(
+              oldState: ComposeState(noteModel: noteModel))),
         ], child: ComposePage(returnValueCallback: action));
       },
       closedElevation: 0.0,

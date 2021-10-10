@@ -25,8 +25,8 @@ class LocalNotifications extends Notifications {
   final MacOSInitializationSettings initializationSettingsMacOS =
       const MacOSInitializationSettings();
   AndroidNotificationDetails androidPlatformChannelSpecifics =
-      const AndroidNotificationDetails(notificationChannelId,
-          notificationChannelName, notificationChannelDescription,
+      const AndroidNotificationDetails(
+          notificationChannelId, notificationChannelName,
           importance: Importance.max, priority: Priority.high, showWhen: false);
   late NotificationDetails platformChannelSpecifics =
       NotificationDetails(android: androidPlatformChannelSpecifics);
@@ -41,7 +41,6 @@ class LocalNotifications extends Notifications {
       initializationSettings,
     );
     tz.initializeTimeZones();
-    // tz.setLocalLocation(tz.getLocation('Asia/Ho_Chi_Minh'));
     ready.complete();
   }
 

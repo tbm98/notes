@@ -28,7 +28,7 @@ class _$NoteStateTearOff {
     );
   }
 
-  NoteState fromJson(Map<String, Object> json) {
+  NoteState fromJson(Map<String, Object?> json) {
     return NoteState.fromJson(json);
   }
 }
@@ -160,20 +160,16 @@ class _$_NoteState with DiagnosticableTreeMixin implements _NoteState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _NoteState &&
+        (other.runtimeType == runtimeType &&
+            other is _NoteState &&
             (identical(other.noteModel, noteModel) ||
-                const DeepCollectionEquality()
-                    .equals(other.noteModel, noteModel)) &&
+                other.noteModel == noteModel) &&
             (identical(other.selected, selected) ||
-                const DeepCollectionEquality()
-                    .equals(other.selected, selected)));
+                other.selected == selected));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(noteModel) ^
-      const DeepCollectionEquality().hash(selected);
+  int get hashCode => Object.hash(runtimeType, noteModel, selected);
 
   @JsonKey(ignore: true)
   @override
@@ -194,9 +190,9 @@ abstract class _NoteState implements NoteState {
       _$_NoteState.fromJson;
 
   @override
-  NoteModel get noteModel => throw _privateConstructorUsedError;
+  NoteModel get noteModel;
   @override
-  bool get selected => throw _privateConstructorUsedError;
+  bool get selected;
   @override
   @JsonKey(ignore: true)
   _$NoteStateCopyWith<_NoteState> get copyWith =>

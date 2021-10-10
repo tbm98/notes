@@ -44,7 +44,7 @@ class _$NoteModelTearOff {
     );
   }
 
-  NoteModel fromJson(Map<String, Object> json) {
+  NoteModel fromJson(Map<String, Object?> json) {
     return NoteModel.fromJson(json);
   }
 }
@@ -298,43 +298,26 @@ class _$_NoteModel extends _NoteModel with DiagnosticableTreeMixin {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _NoteModel &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
+        (other.runtimeType == runtimeType &&
+            other is _NoteModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
             (identical(other.subTitle, subTitle) ||
-                const DeepCollectionEquality()
-                    .equals(other.subTitle, subTitle)) &&
-            (identical(other.alarm, alarm) ||
-                const DeepCollectionEquality().equals(other.alarm, alarm)) &&
-            (identical(other.time, time) ||
-                const DeepCollectionEquality().equals(other.time, time)) &&
-            (identical(other.type, type) ||
-                const DeepCollectionEquality().equals(other.type, type)) &&
+                other.subTitle == subTitle) &&
+            (identical(other.alarm, alarm) || other.alarm == alarm) &&
+            (identical(other.time, time) || other.time == time) &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.finished, finished) ||
-                const DeepCollectionEquality()
-                    .equals(other.finished, finished)) &&
+                other.finished == finished) &&
             (identical(other.fbDocsId, fbDocsId) ||
-                const DeepCollectionEquality()
-                    .equals(other.fbDocsId, fbDocsId)) &&
+                other.fbDocsId == fbDocsId) &&
             (identical(other.movedToTrash, movedToTrash) ||
-                const DeepCollectionEquality()
-                    .equals(other.movedToTrash, movedToTrash)));
+                other.movedToTrash == movedToTrash));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(subTitle) ^
-      const DeepCollectionEquality().hash(alarm) ^
-      const DeepCollectionEquality().hash(time) ^
-      const DeepCollectionEquality().hash(type) ^
-      const DeepCollectionEquality().hash(finished) ^
-      const DeepCollectionEquality().hash(fbDocsId) ^
-      const DeepCollectionEquality().hash(movedToTrash);
+  int get hashCode => Object.hash(runtimeType, id, title, subTitle, alarm, time,
+      type, finished, fbDocsId, movedToTrash);
 
   @JsonKey(ignore: true)
   @override
@@ -364,27 +347,27 @@ abstract class _NoteModel extends NoteModel {
       _$_NoteModel.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
   @JsonKey(defaultValue: '')
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
   @JsonKey(defaultValue: '')
-  String get subTitle => throw _privateConstructorUsedError;
+  String get subTitle;
   @override
-  int? get alarm => throw _privateConstructorUsedError;
+  int? get alarm;
   @override
-  int? get time => throw _privateConstructorUsedError;
+  int? get time;
   @override
   @JsonKey(unknownEnumValue: NoteType.memory)
-  NoteType get type => throw _privateConstructorUsedError;
+  NoteType get type;
   @override
   @JsonKey(defaultValue: false)
-  bool get finished => throw _privateConstructorUsedError;
+  bool get finished;
   @override
-  String? get fbDocsId => throw _privateConstructorUsedError;
+  String? get fbDocsId;
   @override
-  bool get movedToTrash => throw _privateConstructorUsedError;
+  bool get movedToTrash;
   @override
   @JsonKey(ignore: true)
   _$NoteModelCopyWith<_NoteModel> get copyWith =>

@@ -30,7 +30,7 @@ class _$NotificationModelTearOff {
     );
   }
 
-  NotificationModel fromJson(Map<String, Object> json) {
+  NotificationModel fromJson(Map<String, Object?> json) {
     return NotificationModel.fromJson(json);
   }
 }
@@ -171,22 +171,16 @@ class _$_NotificationModel
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _NotificationModel &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
+        (other.runtimeType == runtimeType &&
+            other is _NotificationModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
             (identical(other.subTitle, subTitle) ||
-                const DeepCollectionEquality()
-                    .equals(other.subTitle, subTitle)));
+                other.subTitle == subTitle));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(subTitle);
+  int get hashCode => Object.hash(runtimeType, id, title, subTitle);
 
   @JsonKey(ignore: true)
   @override
@@ -209,11 +203,11 @@ abstract class _NotificationModel implements NotificationModel {
       _$_NotificationModel.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
-  String get subTitle => throw _privateConstructorUsedError;
+  String get subTitle;
   @override
   @JsonKey(ignore: true)
   _$NotificationModelCopyWith<_NotificationModel> get copyWith =>
