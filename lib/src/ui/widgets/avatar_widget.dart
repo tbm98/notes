@@ -38,13 +38,15 @@ class SignedInAvatar extends ConsumerWidget {
         onTap: () {
           showProfileDialog(context);
         },
-        child: ClipOval(
-          child: CachedNetworkImage(
-            imageUrl: user.avatarUrl ?? '',
-            width: avatarSize,
-            height: avatarSize,
-          ),
-        ),
+        child: user.avatarUrl == null
+            ? const GuestAvatar()
+            : ClipOval(
+                child: CachedNetworkImage(
+                  imageUrl: user.avatarUrl ?? '',
+                  width: avatarSize,
+                  height: avatarSize,
+                ),
+              ),
       ),
     );
   }
@@ -66,7 +68,9 @@ class GuestAvatar extends ConsumerWidget {
             ref.read(profileProvider.notifier).signIn();
           },
           child: const CircleAvatar(
-              backgroundColor: Colors.yellow, radius: 20, child: Text('M')),
+              backgroundColor: Colors.yellow,
+              radius: 20,
+              child: Text('A')),
         ),
       ),
     );
