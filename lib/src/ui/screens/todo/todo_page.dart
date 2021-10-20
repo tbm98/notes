@@ -151,7 +151,7 @@ class _ItemListRaw extends ConsumerWidget {
       ) {
         return ListTile(
           onTap: action,
-          tileColor: finished ? Colors.green : null,
+          enabled: !finished,
           title: Text(noteModel.title, style: textStyle),
           subtitle: Text(noteModel.subTitle, style: textStyle),
           trailing: Row(
