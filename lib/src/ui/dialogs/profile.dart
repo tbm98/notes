@@ -32,9 +32,7 @@ class ProfileDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      decoration: BoxDecoration(
-          color: Theme.of(context).canvasColor,
-          borderRadius: BorderRadius.circular(16)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
       padding: const EdgeInsets.all(8),
       width: MediaQuery.of(context).size.width * 0.8,
       child: Column(

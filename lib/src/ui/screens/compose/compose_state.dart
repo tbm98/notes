@@ -21,4 +21,3 @@ class ComposeState with _$ComposeState {
   factory ComposeState.fromJson(Map<String, dynamic> json) =>
       _$ComposeStateFromJson(json);
 }
-

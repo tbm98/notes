@@ -20,10 +20,9 @@ void setupGetIt() {
   getIt.registerFactory<ShareHandler>(() => ShareHandlerDefault());
 }
 
-void setupGetItFake(){
+void setupGetItFake() {
   getIt.registerLazySingleton<Auth>(() => FakeAuth());
-  getIt.registerLazySingleton<Storage>(
-          () => FakeStorage());
+  getIt.registerLazySingleton<Storage>(() => FakeStorage());
   getIt.registerLazySingleton<Notifications>(() => LocalNotifications());
   getIt.registerFactory<ShareHandler>(() => ShareHandlerDefault());
 }
