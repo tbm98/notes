@@ -88,7 +88,7 @@ class _TrashListRaw extends ConsumerWidget {
             ? const TextStyle(decoration: TextDecoration.lineThrough)
             : const TextStyle();
         return ListTile(
-          tileColor: finished ? Colors.green : null,
+          enabled: !finished,
           title: Text(
             noteModels[index].title,
             style: textStyle,

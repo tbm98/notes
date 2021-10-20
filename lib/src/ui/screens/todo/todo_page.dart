@@ -87,8 +87,10 @@ class _SectionFinishedTodoList extends StatelessWidget {
         Container(
             width: double.infinity,
             padding: const EdgeInsets.all(8),
-            color: Theme.of(context).primaryColor.withAlpha(255 ~/ 4),
-            child: Text(title)),
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.headline6,
+            )),
         _TodoListRaw(
           noteModels: todos,
         ),

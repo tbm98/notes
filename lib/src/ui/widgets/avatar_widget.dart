@@ -39,7 +39,7 @@ class SignedInAvatar extends ConsumerWidget {
           showProfileDialog(context);
         },
         child: user.avatarUrl == null
-            ? const GuestAvatar()
+            ? const IgnorePointer(child: GuestAvatar())
             : ClipOval(
                 child: CachedNetworkImage(
                   imageUrl: user.avatarUrl ?? '',
@@ -68,9 +68,7 @@ class GuestAvatar extends ConsumerWidget {
             ref.read(profileProvider.notifier).signIn();
           },
           child: const CircleAvatar(
-              backgroundColor: Colors.yellow,
-              radius: 20,
-              child: Text('A')),
+              backgroundColor: Colors.yellow, radius: 20, child: Text('A')),
         ),
       ),
     );

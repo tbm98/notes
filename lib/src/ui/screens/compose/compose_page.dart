@@ -51,51 +51,58 @@ class _AddNotePageState extends ConsumerState<ComposePage> {
         composeState.noteModel.subTitle.isNotEmpty) {
       _noteController.text = composeState.noteModel.subTitle;
     }
-    return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(onPressed: _handleReturn),
-        actions: [
-          const _ComposeAction(),
-          IconButton(onPressed: _handleReturn, icon: const Icon(Icons.done))
-        ],
-      ),
-      body: SizedBox.expand(
-        child: GestureDetector(
-          onTap: () {
-            _contentFocusNode.requestFocus();
-          },
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    controller: _titleController,
-                    decoration: const InputDecoration(
-                      hintText: 'Title',
-                      border: InputBorder.none,
+    return WillPopScope(
+      onWillPop: () {
+        _handleReturn();
+        return Future.value(true);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          leading: const BackButton(),
+          actions: [
+            const _ComposeAction(),
+            IconButton(onPressed: _handleReturn, icon: const Icon(Icons.done))
+          ],
+        ),
+        body: SizedBox.expand(
+          child: GestureDetector(
+            onTap: () {
+              _contentFocusNode.requestFocus();
+            },
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextField(
+                      controller: _titleController,
+                      decoration: const InputDecoration(
+                        hintText: 'Title',
+                        border: InputBorder.none,
+                      ),
+                      maxLines: null,
+                      style: const TextStyle(fontSize: 24),
+                      textInputAction: TextInputAction.done,
+                      autofocus: true,
+                      onSubmitted: (_) => _contentFocusNode.requestFocus(),
+                      onChanged:
+                          ref.read(composeProvider.notifier).changedTitle,
                     ),
-                    maxLines: null,
-                    style: const TextStyle(fontSize: 24),
-                    textInputAction: TextInputAction.done,
-                    autofocus: true,
-                    onSubmitted: (_) => _contentFocusNode.requestFocus(),
-                    onChanged: ref.read(composeProvider.notifier).changedTitle,
-                  ),
-                  const NoticeNoteInfoWidget(),
-                  TextField(
-                    controller: _noteController,
-                    decoration: const InputDecoration(
-                      hintText: 'Note',
-                      border: InputBorder.none,
+                    const NoticeNoteInfoWidget(),
+                    TextField(
+                      controller: _noteController,
+                      decoration: const InputDecoration(
+                        hintText: 'Note',
+                        border: InputBorder.none,
+                      ),
+                      maxLines: null,
+                      textInputAction: TextInputAction.newline,
+                      focusNode: _contentFocusNode,
+                      onChanged: ref.read(composeProvider.notifier).changedNote,
                     ),
-                    maxLines: null,
-                    textInputAction: TextInputAction.newline,
-                    focusNode: _contentFocusNode,
-                    onChanged: ref.read(composeProvider.notifier).changedNote,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
