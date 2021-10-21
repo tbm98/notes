@@ -6,10 +6,12 @@ My notes, todo list, and memories.
 | ----------- | ----------- | ----------- | ----------- |
 | x      | x       |        |         |
 
+Guest
+![](./test/goldens_test/guest/goldens/guest_page.png)
 
-Guest             |  Login                                  | Memories
+Login             |  Memories                                  | empty
 :-------------------------:|:-------------------------:|:-------------------------:
-![](./screenshots/guest.png)  |  ![](./screenshots/login.png) | ![](./screenshots/memories.png)
+  |  ![](./screenshots/login.png) | ![](./screenshots/memories.png)
 Share memory             |  info                                  | Confirm empty trash
 ![](./screenshots/share_memory.png)  |  ![](./screenshots/info.png) | ![](./screenshots/confirm_empty_trash.png)
 

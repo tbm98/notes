@@ -1,1 +1,2 @@
 flutter format .
+flutter test
