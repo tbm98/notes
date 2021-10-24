@@ -21,7 +21,7 @@ class DoneButton extends ConsumerWidget {
           final scaffoldMessager = ScaffoldMessenger.of(context);
           scaffoldMessager.showSnackBar(SnackBar(
             duration: const Duration(minutes: 1),
-            content: Text('Done "${Characters(noteModel.title).take(10)}"'),
+            content: Text('Done "${noteModel.title}"'),
             action: SnackBarAction(
               label: 'Undo',
               onPressed: () {

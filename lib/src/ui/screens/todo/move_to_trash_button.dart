@@ -20,8 +20,7 @@ class MoveToTrashButton extends ConsumerWidget {
           await allNoteNotifier
               .updateNote(noteModel.copyWith(movedToTrash: true));
           scaffoldMessager.showSnackBar(SnackBar(
-            content:
-                Text('Moved ${Characters(noteModel.title).take(10)} to trash'),
+            content: Text('Moved ${noteModel.title} to trash'),
             action: SnackBarAction(
               label: 'Undo',
               onPressed: () {
