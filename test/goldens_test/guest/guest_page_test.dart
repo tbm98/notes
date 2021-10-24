@@ -2,8 +2,7 @@ import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:notes/src/ui/screens/guest/guest_page.dart';
 
 void main() {
-  testGoldens('GuestPage',
-      (tester) async {
+  testGoldens('GuestPage', (tester) async {
     final builder = DeviceBuilder()
       ..overrideDevicesForAllScenarios(devices: [
         Device.phone,

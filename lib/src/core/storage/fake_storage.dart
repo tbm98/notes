@@ -26,6 +26,7 @@ class FakeStorage extends Storage {
     Future(() {
       if (_isFirstTime) {
         _notesSink.add(_notes);
+        _isFirstTime = false;
       }
     });
     return _notesStream;
