@@ -67,6 +67,7 @@ class _FinishedTodoList extends ConsumerWidget {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: todos.length,
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         return _SectionFinishedTodoList(todos[index]);
       },
