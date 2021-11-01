@@ -8,7 +8,10 @@ import 'package:notes/src/ui/screens/compose/compose_state.dart';
 import 'package:notes/src/ui/screens/compose/providers.dart';
 import 'package:notes/src/ui/screens/home/providers/note_providers.dart';
 import 'package:notes/src/ui/screens/todo/providers.dart';
+import 'package:notes/src/ui/screens/todo/move_to_trash_button.dart';
 import 'package:notes/src/utils/time.dart';
+
+import 'done_button.dart';
 
 class TodoPage extends ConsumerWidget {
   const TodoPage({
@@ -48,7 +51,10 @@ class _UnfinishedTodoList extends ConsumerWidget {
       return const SizedBox();
     }
 
-    return _TodoListRaw(noteModels: todos.map((e) => e.noteModel).toList());
+    return _TodoListRaw(
+      noteModels: todos.map((e) => e.noteModel).toList(),
+      finished: false,
+    );
   }
 }
 
@@ -94,6 +100,7 @@ class _SectionFinishedTodoList extends StatelessWidget {
             )),
         _TodoListRaw(
           noteModels: todos,
+          finished: true,
         ),
       ],
     );
@@ -104,8 +111,10 @@ class _TodoListRaw extends ConsumerWidget {
   const _TodoListRaw({
     Key? key,
     required this.noteModels,
+    required this.finished,
   }) : super(key: key);
 
+  final bool finished;
   final List<NoteModel> noteModels;
 
   @override
@@ -115,14 +124,17 @@ class _TodoListRaw extends ConsumerWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: noteModels.length,
       itemBuilder: (context, index) {
-        return _ItemListRaw(noteModel: noteModels[index]);
+        if (finished) {
+          return _ItemFinishedRaw(noteModel: noteModels[index]);
+        }
+        return _ItemUnFinishedRaw(noteModel: noteModels[index]);
       },
     );
   }
 }
 
-class _ItemListRaw extends ConsumerWidget {
-  const _ItemListRaw({
+class _ItemUnFinishedRaw extends ConsumerWidget {
+  const _ItemUnFinishedRaw({
     Key? key,
     required this.noteModel,
   }) : super(key: key);
@@ -160,32 +172,8 @@ class _ItemListRaw extends ConsumerWidget {
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Checkbox(
-                onChanged: (bool? value) {
-                  ref
-                      .read(allNoteProvider.notifier)
-                      .updateNote(noteModel.copyWith(finished: value!));
-                },
-                value: noteModel.finished,
-              ),
-              IconButton(
-                  onPressed: () async {
-                    final scaffoldMessager = ScaffoldMessenger.of(context);
-                    final allNoteNotifier = ref.read(allNoteProvider.notifier);
-                    await allNoteNotifier
-                        .updateNote(noteModel.copyWith(movedToTrash: true));
-                    scaffoldMessager.showSnackBar(SnackBar(
-                      content: const Text('Moved 1 note to trash'),
-                      action: SnackBarAction(
-                        label: 'Undo',
-                        onPressed: () {
-                          allNoteNotifier.updateNote(
-                              noteModel.copyWith(movedToTrash: false));
-                        },
-                      ),
-                    ));
-                  },
-                  icon: const Icon(CupertinoIcons.trash))
+              DoneButton(noteModel: noteModel),
+              MoveToTrashButton(noteModel: noteModel),
             ],
           ),
         );
@@ -197,6 +185,25 @@ class _ItemListRaw extends ConsumerWidget {
         ref.read(allNoteProvider.notifier).updateNote(returnValue);
       },
       transitionDuration: const Duration(milliseconds: 500),
+    );
+  }
+}
+
+class _ItemFinishedRaw extends ConsumerWidget {
+  const _ItemFinishedRaw({
+    Key? key,
+    required this.noteModel,
+  }) : super(key: key);
+  final NoteModel noteModel;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    const textStyle = TextStyle(decoration: TextDecoration.lineThrough);
+    return ListTile(
+      enabled: false,
+      title: Text(noteModel.title, style: textStyle),
+      subtitle: Text(noteModel.subTitle, style: textStyle),
+      trailing: MoveToTrashButton(noteModel: noteModel),
     );
   }
 }

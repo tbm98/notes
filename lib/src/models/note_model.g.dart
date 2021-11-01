@@ -12,7 +12,7 @@ _$_NoteModel _$$_NoteModelFromJson(Map<String, dynamic> json) => _$_NoteModel(
       subTitle: json['sub_title'] as String? ?? '',
       alarm: json['alarm'] as int?,
       time: json['time'] as int?,
-      type: _$enumDecode(_$NoteTypeEnumMap, json['type'],
+      type: $enumDecode(_$NoteTypeEnumMap, json['type'],
           unknownValue: NoteType.memory),
       finished: json['finished'] as bool? ?? false,
       fbDocsId: json['fb_docs_id'] as String?,
@@ -31,32 +31,6 @@ Map<String, dynamic> _$$_NoteModelToJson(_$_NoteModel instance) =>
       'fb_docs_id': instance.fbDocsId,
       'moved_to_trash': instance.movedToTrash,
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
 
 const _$NoteTypeEnumMap = {
   NoteType.todo: 'todo',
