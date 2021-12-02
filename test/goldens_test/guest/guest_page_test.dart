@@ -10,10 +10,7 @@ void main() {
   testGoldens('GuestPage', (tester) async {
     final builder = DeviceBuilder()
       ..overrideDevicesForAllScenarios(devices: [
-        Device.phone,
         Device.iphone11,
-        Device.tabletPortrait,
-        Device.tabletLandscape,
       ])
       ..addScenario(
         widget: const GuestPage(),
@@ -33,7 +30,7 @@ void main() {
   });
 }
 
-const double _kGoldenDiffTolerance = 1;
+const double _kGoldenDiffTolerance = 0.05;
 
 class CocoonFileComparator extends LocalFileComparator {
   CocoonFileComparator(String testFile) : super(Uri.parse(testFile));

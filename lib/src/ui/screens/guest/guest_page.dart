@@ -11,13 +11,12 @@ class GuestPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Container(
-        color: Colors.blue,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                ' ádfasdfas',
+                'NotesNotesNotesNoteesNotesNotesNotesNotesNotesNotesNotesNotsNotesNotesNotNotesNotes',
                 style: TextStyle(
                   fontSize: 72,
                   color: Theme.of(context).primaryColor,
@@ -27,7 +26,7 @@ class GuestPage extends ConsumerWidget {
                 onPressed: () {
                   ref.read(profileProvider.notifier).signIn();
                 },
-                child: const Text(' A'),
+                child: const Text('Login Login Login Login '),
               ),
             ],
           ),
