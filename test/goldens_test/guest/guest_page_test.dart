@@ -33,7 +33,7 @@ void main() {
   });
 }
 
-const double _kGoldenDiffTolerance = 0.01;
+const double _kGoldenDiffTolerance = 1;
 
 class CocoonFileComparator extends LocalFileComparator {
   CocoonFileComparator(String testFile) : super(Uri.parse(testFile));
