@@ -10,24 +10,27 @@ class GuestPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              ' ',
-              style: TextStyle(
-                fontSize: 72,
-                color: Theme.of(context).primaryColor,
+      body: Container(
+        color: Colors.blue,
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                ' ádfasdfas',
+                style: TextStyle(
+                  fontSize: 72,
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
-            ),
-            OutlinedButton(
-              onPressed: () {
-                ref.read(profileProvider.notifier).signIn();
-              },
-              child: const Text(' '),
-            ),
-          ],
+              OutlinedButton(
+                onPressed: () {
+                  ref.read(profileProvider.notifier).signIn();
+                },
+                child: const Text(' A'),
+              ),
+            ],
+          ),
         ),
       ),
     );

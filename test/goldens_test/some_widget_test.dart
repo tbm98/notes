@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:notes/src/ui/screens/guest/guest_page.dart';
 import 'package:path/path.dart' as path;
+
 void main() {
   testGoldens('GuestPage', (tester) async {
     final builder = DeviceBuilder()
@@ -16,8 +17,13 @@ void main() {
         Device.tabletLandscape,
       ])
       ..addScenario(
-        widget: const GuestPage(),
-        name: 'Guest page',
+        widget: Container(
+          width: 100,
+          height: 100,
+          color: Colors.yellow,
+          child: Text('hihi'),
+        ),
+        name: 'Some widget',
       );
 
     await tester.pumpDeviceBuilder(builder);
@@ -25,15 +31,11 @@ void main() {
     //   (goldenFileComparator as LocalFileComparator).basedir.toString(),
     //   'guest_page',
     // ));
-    try {
-      await screenMatchesGolden(tester, 'guest_page');
-    } catch (e) {
-      print(e);
-    }
+    await screenMatchesGolden(tester, 'some_widget');
   });
 }
 
-const double _kGoldenDiffTolerance = 0.01;
+const double _kGoldenDiffTolerance = 0.005;
 
 class CocoonFileComparator extends LocalFileComparator {
   CocoonFileComparator(String testFile) : super(Uri.parse(testFile));
