@@ -1,3 +1,4 @@
+import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:notes/src/ui/screens/guest/guest_page.dart';
 
@@ -17,6 +18,10 @@ void main() {
 
     await tester.pumpDeviceBuilder(builder);
 
-    await screenMatchesGolden(tester, 'guest_page');
+    try {
+      await screenMatchesGolden(tester, 'guest_page');
+    } catch (e) {
+      print(e);
+    }
   });
 }

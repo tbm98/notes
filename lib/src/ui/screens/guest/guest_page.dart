@@ -15,7 +15,7 @@ class GuestPage extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Notes',
+              ' ',
               style: TextStyle(
                 fontSize: 72,
                 color: Theme.of(context).primaryColor,
@@ -25,7 +25,7 @@ class GuestPage extends ConsumerWidget {
               onPressed: () {
                 ref.read(profileProvider.notifier).signIn();
               },
-              child: const Text('Login'),
+              child: const Text(' '),
             ),
           ],
         ),
