@@ -24,7 +24,16 @@ void main() {
           child: Text('hihi'),
         ),
         name: 'Some widget',
+      )
+      ..addScenario(
+        widget: Container(
+          width: 100,
+          height: 100,
+          child: Image.asset('screenshots/rainbow.png'),
+        ),
+        name: 'image widget',
       );
+    ;
 
     await tester.pumpDeviceBuilder(builder);
     // goldenFileComparator = CocoonFileComparator(path.join(
