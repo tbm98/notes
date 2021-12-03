@@ -64,6 +64,7 @@ dependencies:
   logger: ^1.1.0
   intl: ^0.17.0
   uuid: ^3.0.5
+  path: ^1.8.0
 
 
 
@@ -74,7 +75,7 @@ dev_dependencies:
   json_serializable: ^5.0.2
   freezed: ^0.15.0+1
   mockito: ^5.0.16
-  golden_toolkit: ^0.11.0
+  golden_toolkit: ^0.12.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -95,8 +96,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - screenshots/rainbow.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
