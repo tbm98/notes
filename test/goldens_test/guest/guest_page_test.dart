@@ -17,7 +17,10 @@ void main() {
         name: 'Guest page',
       );
 
-    await tester.pumpDeviceBuilder(builder);
+    await tester.pumpDeviceBuilder(builder,wrapper: materialAppWrapper(
+      theme: ThemeData.light(),
+      platform: TargetPlatform.android,
+    ));
     // goldenFileComparator = CocoonFileComparator(path.join(
     //   (goldenFileComparator as LocalFileComparator).basedir.toString(),
     //   'guest_page',
