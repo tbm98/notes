@@ -6,7 +6,7 @@ import 'package:path/path.dart' as path;
 import 'goldens_test/guest/guest_page_test.dart';
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
-  await loadAppFonts();
+  // await loadAppFonts();
   goldenFileComparator = CocoonFileComparator(path.join(
     (goldenFileComparator as LocalFileComparator).basedir.toString(),
     'guest_page',

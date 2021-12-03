@@ -16,7 +16,7 @@ class GuestPage extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'NotesNotesNotesNoteesNotesNotesNotesNotesNotesNotesNotesNotsNotesNotesNotNotesNotes',
+                'NotesNotesNotesNoteesotesNotesNotNotesNotes',
                 style: TextStyle(
                   fontSize: 72,
                   color: Theme.of(context).primaryColor,
